@@ -31,8 +31,12 @@
       ];
 
       buildInputs = with astal.packages.${system}; [
-        astal3
         io
+        astal4
+        hyprland
+        mpris
+        tray
+        gjs
         # any other package
       ];
 
