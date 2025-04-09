@@ -7,6 +7,6 @@ howdy:
 #   nix develop --command fish
 
 run:
-  ags run src/app.ts --gtk4
+  ags run -d ./src --gtk4
 
 
