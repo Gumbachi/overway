@@ -1,14 +1,10 @@
-import {
-  RestartButton,
-  InhibitIdleButton,
-  RotateWallpaperButton,
-  ShutdownButton,
-} from "./QuickControls";
 import { Astal, App, Gdk } from "astal/gtk4";
+import SystemControls from "./system-controls/system-controls";
 
 export function Overway() {
   return (
     <window
+      // visible
       name="overway"
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       layer={Astal.Layer.OVERLAY}
@@ -19,10 +15,7 @@ export function Overway() {
       }}
     >
       <box>
-        <RotateWallpaperButton />
-        <InhibitIdleButton />
-        <RestartButton />
-        <ShutdownButton />
+        <SystemControls />
       </box>
     </window>
   );

@@ -3,33 +3,7 @@ import { exec, subprocess, Variable } from "astal";
 const OPEN_EYE = "xapp-prefs-display-symbolic";
 const CLOSED_EYE = "image-red-eye-symbolic";
 
-export function RestartButton(): JSX.Element {
-  return (
-    <button onClicked="systemctl reboot" iconName="system-reboot-symbolic" />
-  );
-}
-
-export function ShutdownButton(): JSX.Element {
-  return (
-    <button
-      onClicked="systemctl poweroff"
-      iconName="system-shutdown-symbolic"
-    />
-  );
-}
-
-export function RotateWallpaperButton(): JSX.Element {
-  return (
-    <button
-      onClicked={() => {
-        exec('bash -c "waypaper --random > /dev/null"');
-      }}
-      iconName="preferences-desktop-wallpaper-symbolic"
-    />
-  );
-}
-
-export function InhibitIdleButton(): JSX.Element {
+export default function InhibitIdleButton(): JSX.Element {
   function isHypridleRunning(): Boolean {
     try {
       exec("pidof hypridle");
