@@ -4,5 +4,6 @@ import Overway from "./widget/Overway"
 
 App.start({
   css: style,
+  instanceName: "overway",
   main: () => Overway()
 })
