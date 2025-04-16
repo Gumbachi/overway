@@ -7,9 +7,12 @@
 }: {
   # https://devenv.sh/packages/
   packages = with pkgs; [
-    # inputs.astal.packages.${system}.default
-    inputs.ags.packages.${system}.default
-    inputs.ags.packages.${system}.io
+    inputs.ags.packages.${system}.agsFull
+    # inputs.astal.packages.${system}.hyprland
+    # inputs.astal.packages.${system}.mpris
+    # inputs.astal.packages.${system}.tray
+    # inputs.astal.packages.${system}.network
+    # inputs.astal.packages.${system}.wireplumber
   ];
 
   # https://devenv.sh/languages/

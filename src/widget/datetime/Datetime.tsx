@@ -9,6 +9,7 @@ function Time({ format = "%T" }) {
     className = "Time"
     onDestroy = { () => time.drop() }
     label = { time() }
+    hexpand
   />
 }
 

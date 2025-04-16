@@ -1,87 +1,30 @@
-$rosewater: #f5e0dc;
-$flamingo: #f2cdcd;
-$pink: #f5c2e7;
-$mauve: #cba6f7;
-$red: #f38ba8;
-$maroon: #eba0ac;
-$peach: #fab387;
-$yellow: #f9e2af;
-$green: #a6e3a1;
-$teal: #94e2d5;
-$sky: #89dceb;
-$sapphire: #74c7ec;
-$blue: #89b4fa;
-$lavender: #b4befe;
-$text: #cdd6f4;
-$subtext1: #bac2de;
-$subtext0: #a6adc8;
-$overlay2: #9399b2;
-$overlay1: #7f849c;
-$overlay0: #6c7086;
-$surface2: #585b70;
-$surface1: #45475a;
-$surface0: #313244;
-$base: #1e1e2e;
-$mantle: #181825;
-$crust: #11111b;
-
-// Do this properly one day
-/* $fg-color: #{"@theme_fg_color"}; */
-/* $bg-color: #{"@theme_bg_color"}; */
+@use "mocha.sass";
+@use "widget/media-player/MediaPlayer";
+@use "widget/system-controls/SystemControls";
+@use "widget/datetime/Datetime";
+@use "widget/volume-controls/VolumeControls";
 
 // Border size = 4
 // gaps 5
 
+// Hide keyboard hinting
+* button:focus {
+  box-shadow: none;
+}
+
+
 window.Overway {
-  margin: 50px;
+
+  .container {
+    padding: 200px;
+
+    centerbox {
+      margin: 2.5px;
+    }
+  }
+
+  // margin: 50px;
   border-radius: 10px;
   background-color: rgba($color: #6C7086, $alpha: 0.6);
-
-  .Datetime {
-
-    background-color: $base;
-    border-color: $surface0;
-    border-width: 4px;
-    border-style: solid;
-    border-radius: 10px;
-
-    margin-left: 2.5px;
-    margin-right: 2.5px;
-
-    padding: 15px;
-
-    .Time {
-      font-weight: bold;
-      font-size: 36px;
-    }
-
-    .Date {
-      font-size: 24px;
-    }
-  }
-
-  .SystemControls button {
-    background-color: $base;
-    border-color: $surface0;
-    border-width: 4px;
-    border-style: solid;
-    border-radius: 10px;
-
-    margin-left: 2.5px;
-    margin-right: 2.5px;
-
-    &:hover {
-      border-color: $mauve;
-    }
-
-    icon {
-      font-size: 48px;
-    }
-  }
-
-
-
-
-
 
 }

@@ -1,10 +1,12 @@
 import { Astal, App, Gdk } from "astal/gtk3";
 import SystemControls from "./system-controls/SystemControls";
-import Datetime from "./Datetime";
+import Datetime from "./datetime/Datetime";
+import MprisPlayers from "./media-player/MediaPlayer";
+import VolumeControls from "./volume-controls/VolumeControls";
 
 export default function Overway() {
 	return <window
-    visible
+    // visible
     className="Overway"
     name="overway"
     exclusivity={Astal.Exclusivity.EXCLUSIVE}
@@ -15,37 +17,20 @@ export default function Overway() {
       if (event.get_keyval()[1] === Gdk.KEY_Escape) { self.hide() }
     }}
   >
-    <centerbox>
-      <Datetime />
-      <SystemControls />
-    </centerbox>
+
+    <box vertical className="container">
+
+      <centerbox>
+        <VolumeControls />
+        <MprisPlayers />
+      </centerbox>
+
+      <centerbox>
+        <Datetime />
+        <SystemControls />
+      </centerbox>
+
+    </box>
   </window>
 }
 
-// return <window
-//     visible
-//     cssClasses={["Bar"]}
-//     gdkmonitor={gdkmonitor}
-//     exclusivity={Astal.Exclusivity.EXCLUSIVE}
-//     anchor={TOP | LEFT | RIGHT}
-//     application={App}>
-//     <centerbox cssName="centerbox">
-//         <button
-//             onClicked="echo hello"
-//             hexpand
-//             halign={Gtk.Align.CENTER}
-//         >
-//         Welcome to AGS
-//         </button>
-//         <box />
-//         <menubutton
-//             hexpand
-//             halign={Gtk.Align.CENTER}
-//         >
-//             <label label={time()} />
-//             <popover>
-//                 <Gtk.Calendar />
-//             </popover>
-//         </menubutton>
-//     </centerbox>
-// </window>
