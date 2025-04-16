@@ -1,5 +1,6 @@
 import { Astal, App, Gdk } from "astal/gtk3";
 import SystemControls from "./system-controls/SystemControls";
+import Datetime from "./Datetime";
 
 export default function Overway() {
 	return <window
@@ -14,7 +15,10 @@ export default function Overway() {
       if (event.get_keyval()[1] === Gdk.KEY_Escape) { self.hide() }
     }}
   >
-    <SystemControls />
+    <centerbox>
+      <Datetime />
+      <SystemControls />
+    </centerbox>
   </window>
 }
 
