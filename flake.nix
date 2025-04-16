@@ -24,7 +24,7 @@
         src = ./src;
         name = "overway";
         entry = "app.ts";
-        gtk4 = true;
+        gtk4 = false;
       };
     };
   };

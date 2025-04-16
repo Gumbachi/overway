@@ -1,25 +1,23 @@
-import { Astal, App, Gdk } from "astal/gtk4";
-import SystemControls from "./system-controls/system-controls";
+import { Astal, App, Gdk } from "astal/gtk3";
+import SystemControls from "./system-controls/SystemControls";
 
-export function Overway() {
-  return (
-    <window
-      // visible
-      name="overway"
-      exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      layer={Astal.Layer.OVERLAY}
-      keymode={Astal.Keymode.ON_DEMAND}
-      application={App}
-      onKeyPressed={(self, keyval) => {
-        if (keyval == Gdk.KEY_Escape) self.hide();
-      }}
-    >
-      <box>
-        <SystemControls />
-      </box>
-    </window>
-  );
+export default function Overway() {
+	return <window
+    visible
+    className="Overway"
+    name="overway"
+    exclusivity={Astal.Exclusivity.EXCLUSIVE}
+    layer={Astal.Layer.OVERLAY}
+    keymode={Astal.Keymode.ON_DEMAND}
+    application={App}
+    onKeyPressEvent={(self, event: Gdk.Event) => {
+      if (event.get_keyval()[1] === Gdk.KEY_Escape) { self.hide() }
+    }}
+  >
+    <SystemControls />
+  </window>
 }
+
 // return <window
 //     visible
 //     cssClasses={["Bar"]}

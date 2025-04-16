@@ -1,11 +1,8 @@
-import { App } from "astal/gtk4";
-import { Overway } from "./widget/window";
-import style from "./style.scss";
+import { App } from "astal/gtk3"
+import style from "./style.scss"
+import Overway from "./widget/Overway"
 
 App.start({
   css: style,
-  instanceName: "overway",
-  main() {
-    Overway();
-  },
-});
+  main: () => Overway()
+})
