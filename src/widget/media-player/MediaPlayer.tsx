@@ -32,7 +32,7 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
       : "media-playback-start-symbolic"
   )
 
-    return <box className="MediaPlayer">
+    return <box className="MediaPlayer" valign={ Gtk.Align.END }>
         <box className="cover-art" css={coverArt} />
         <box vertical>
             <box className="title">

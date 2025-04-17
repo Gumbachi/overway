@@ -1,13 +1,46 @@
 
 @use "../../mocha"
 
+window
+  background: transparent
+
+.VolumeMixer
+
+  min-width: 600px
+  padding: 10px
+
+  background-color: mocha.$surface0
+
+  border: 4px solid mocha.$surface1
+  border-radius: 10px
+
+  .StreamSource
+    padding-left: 20px
+    padding-right: 10px
+    font-weight: bold
+
+  .StreamName
+    padding-right: 20px
+
+  .MixerEntry
+    border-radius: 10px
+    background-color: mocha.$surface1
+    padding: 10px 0px
+    margin: 5px 0px
+    box-shadow: 1px 1px 2px mocha.$base
+
+  scale
+    padding: 15px 20px
+  
+
 .VolumeControls
 
-  padding: 1em
+  padding: 0.6rem
   background-color: mocha.$base
 
   border: 4px solid mocha.$surface0
   border-radius: 10px
+
 
   button
     background-color: mocha.$base
@@ -17,10 +50,15 @@
     &:hover
       border-color: mocha.$mauve
 
+  .ShowMixerButton
+    background-color: mocha.$base
+    border-radius: 10px
+    margin-bottom: 2px
+
   label
     min-width: 2em
     font-weight: bold
-    padding: 0.5em
+    padding: 0.4em 0.5em
 
   scale
     min-width: 5em 

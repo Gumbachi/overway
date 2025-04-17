@@ -1,84 +1,63 @@
-import { bind } from "astal"
+import { bind, Variable } from "astal"
 import Wp from "gi://AstalWp"
 import { Gtk } from "astal/gtk3"
+import { showVolumeMixer } from "../../data/config"
+
 const audio = Wp.get_default()!.audio
 
 const speaker = audio.defaultSpeaker
 const mic = audio.defaultMicrophone
 
-const AudioDeviceType = {
-  SPEAKER: "speaker",
-  MICROPHONE: "microphone"
-}
-
 export default function VolumeControls() {
 
+  const lastVolumes = {
+    [mic.mediaClass]: bind(mic, "volume").get(),
+    [speaker.mediaClass]: bind(speaker, "volume").get()
+  }
+ 
+  function toggleMute(device: Wp.Endpoint) {
+    return () => {
+      const vol = bind(device, "volume").get()
+      if (vol === 0) {
+        device.volume = lastVolumes[device.mediaClass]
+      } else {
+        lastVolumes[device.mediaClass] = vol
+        device.volume = 0
+      }
+    }
+  }
 
-  // const VolumeIndicator = (type, iconPrefix, thresholds) => Widget.Button({
-  //   class_name: "indicator",
-  //   child: Widget.Icon().hook(audio[type], self => {
-  //     const vol = audio[type].volume * 100;
-  //     var icon = thresholds.find(([threshold]) => threshold <= vol)?.[1];
-  //
-  //     if (audio[type].is_muted) {
-  //       icon = 'muted'
-  //     }
-  //
-  //     self.icon = `${iconPrefix}-${icon}-symbolic`;
-  //     self.tooltip_text = `Volume ${Math.floor(vol)}%`;
-  //   }),
-  //   on_clicked: () => {
-  //     print(audio[type].volume)
-  //     // Turn on audio if clicking button and volume is 0
-  //     if (audio[type].volume == 0) {
-  //       audio[type].volume = 1 // This value could be set by config var
-  //     } 
-  //
-  //     // Toggle mute
-  //     audio[type].is_muted = !audio[type].is_muted
-  //   },
-  // })
-  //
-  // const VolumeNumber = (type) => Widget.Label({
-  //   class_name: "value",
-  //   justification: "center",
-  // }).hook(audio[type], self => {
-  //   const volume = Math.floor(audio[type].volume * 100)
-  //
-  //   if (audio[type].is_muted) {
-  //     self.label = "0"
-  //   } else {
-  //     self.label = `${volume}`
-  //   }
-  //
-  // })
-  //
-  //
-  //
-  // const VolumeSlider = (type) => Widget.Slider({
-  //   hexpand: true,
-  //   drawValue: false,
-  //   value: audio[type].bind('volume'),
-  //   onChange: ({ value }) => { 
-  //     if (audio[type].is_muted) audio[type].is_muted = false
-  //     audio[type].volume = value
-  //     if (value === 0) audio[type].is_muted = true
-  //   },
-  // }).hook(audio[type], self => {
-  //   if (audio[type].is_muted) {
-  //     self.value = 0
-  //   } else {
-  //     self.value = audio[type].volume
-  //   }
-  // })
-  //
-  //
+  function getIcon(device: Wp.Endpoint) {
+    const prefix = device === speaker ? "audio-volume" : "microphone-sensitivity"
+    return Variable.derive(
+      [bind(device, "volume"), bind(device, "volumeIcon")],
+      (vol, icon) => vol === 0 ? `${prefix}-muted-symbolic` : icon
+    )
+  }
 
-  return <box vertical homogeneous className = "VolumeControls">
-    
+
+  return <box 
+    className="VolumeControls"
+    vertical
+    homogeneous
+    valign={ Gtk.Align.END }
+  >    
+
+    <button 
+      valign={ Gtk.Align.CENTER }
+      className="ShowMixerButton"
+      onClick={() => showVolumeMixer.set(!showVolumeMixer.get()) }
+    >
+      <box>
+        <icon icon="multimedia-equalizer-symbolic" />
+        <label label="Volume Mixer" />
+      </box>
+    </button>
+
+
     <box>
-      <button valign={ Gtk.Align.CENTER }>
-        <icon icon={ bind(mic, "volumeIcon") }  />
+      <button valign={ Gtk.Align.CENTER } onClick={ toggleMute(mic) }>
+        <icon icon={ bind(getIcon(mic)) }  />
       </button>
       <label 
         justify={ Gtk.Justification.CENTER }
@@ -93,8 +72,8 @@ export default function VolumeControls() {
     </box>
     
     <box>
-      <button valign={ Gtk.Align.CENTER }>
-        <icon icon={ bind(speaker, "volumeIcon") } />
+      <button valign={ Gtk.Align.CENTER } onClick={ toggleMute(speaker) }>
+        <icon icon={ bind(getIcon(speaker)) } />
       </button>
       <label 
         justify={ Gtk.Justification.CENTER }
