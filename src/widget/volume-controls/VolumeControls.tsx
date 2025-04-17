@@ -72,11 +72,13 @@ export default function VolumeControls() {
   //   }
   // })
   //
+  //
 
-  return <centerbox vertical className = "VolumeControls">
+  return <box vertical homogeneous className = "VolumeControls">
+    
     <box>
-      <button>
-        <icon icon={ bind(mic, "volumeIcon") } />
+      <button valign={ Gtk.Align.CENTER }>
+        <icon icon={ bind(mic, "volumeIcon") }  />
       </button>
       <label 
         justify={ Gtk.Justification.CENTER }
@@ -90,23 +92,24 @@ export default function VolumeControls() {
 
     </box>
     
-    <centerbox>
-      <button>
+    <box>
+      <button valign={ Gtk.Align.CENTER }>
         <icon icon={ bind(speaker, "volumeIcon") } />
       </button>
       <label 
         justify={ Gtk.Justification.CENTER }
-        label={ bind(speaker, "volume").as(v => String(Math.ceil(v * 100))) }
+        label={ bind(speaker, "volume").as(v => `${Math.ceil(v * 100)}`) }
       />
       <slider
+        hexpand
         onDragged={ ({value}) => speaker.volume = value }
         value={ bind(speaker, "volume") }
       />
 
-    </centerbox>
+    </box>
 
 
-  </centerbox>
+  </box>
 
 }
 
