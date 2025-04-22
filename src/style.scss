@@ -1,30 +1,235 @@
 @use "mocha.sass";
-@use "widget/media-player/MediaPlayer";
-@use "widget/system-controls/SystemControls";
-@use "widget/datetime/Datetime";
-@use "widget/volume-controls/VolumeControls";
+// @use "widget/media-player/MediaPlayer";
+// @use "widget/system-controls/SystemControls";
+// @use "widget/datetime/Datetime";
+// @use "widget/volume-controls/VolumeControls";
+// @use "widget/Overway.sass";
 
 // Border size = 4
 // gaps 5
 
 // Hide keyboard hinting
 * button:focus {
-  box-shadow: none;
+    box-shadow: none;
+}
+
+// OVERWAY: MAIN WINDOW
+.Overway {
+
+    border-radius: 10px;
+    background-color: rgba($color: #6C7086, $alpha: 0.6);
+
+    .WindowContainer {
+        padding: 200px;
+    }
+
+    .WidgetContainer {
+        background-color: mocha.$base;
+        border: 4px solid mocha.$surface0;
+        border-radius: 10px;
+        margin: 2.5px;
+    }
+}
+
+// Datetime Widget
+.Datetime {
+
+    padding: 15px;
+
+    .Time {
+        font-weight: bold;
+        font-size: 36px;
+    }
+
+    .Date {
+        font-size: 24px;
+    }
+}
+
+// System Control Widget
+.SystemControls {
+    padding: 8px;
+
+    button {
+        background-color: mocha.$base;
+        border: 2px solid mocha.$surface0;
+        border-radius: 100%;
+
+        min-height: 0;
+        min-width: 0;
+        padding: 1em;
+
+        margin: 0 2.5px;
+
+        &:hover {
+            border-color: mocha.$mauve;
+        }
+    }
+
+    icon {
+        font-size: 2em;
+    }
+}
+
+// Volume Mixer Window
+.VolumeMixer {
+    min-width: 600px;
+    padding: 10px;
+
+    background-color: mocha.$surface0;
+
+    border: 4px solid mocha.$surface1;
+    border-radius: 10px;
+
+    .StreamSource {
+        padding-left: 20px;
+        padding-right: 10px;
+        font-weight: bold;
+    }
+
+    .StreamName {
+
+        padding-right: 20px;
+    }
+
+    .MixerEntry {
+        border-radius: 10px;
+        background-color: mocha.$surface1;
+        padding: 10px 0px;
+        margin: 5px 0px;
+        box-shadow: 1px 1px 2px mocha.$base;
+    }
+
+    scale {
+        padding: 15px 20px;
+    }
+
+}
+
+// Volume Controls Widget
+.VolumeControls {
+
+    padding: 0.6rem;
+
+    button {
+        background-color: mocha.$base;
+        border: 2px solid mocha.$surface0;
+        border-radius: 100%;
+        padding: 0.5em;
+        min-width: 0;
+        min-height: 0;
+
+        &:hover {
+            border-color: mocha.$mauve;
+        }
+
+        icon {
+            font-size: 1.2em;
+        }
+    }
+
+    .ShowMixerButton {
+        background-color: mocha.$base;
+        border-radius: 10px;
+        margin-bottom: 2px;
+    }
+
+    label {
+        min-width: 2em;
+        font-weight: bold;
+        padding-left: 10px;
+    }
+
+    scale {
+        min-width: 8em;
+
+        // margin: 1em
+        highlight {
+            border-radius: 10px;
+        }
+
+        trough {
+            border-radius: 10px;
+            min-height: 4px;
+        }
+    }
 }
 
 
-window.Overway {
+.MediaPlayer {
 
-  .container {
-    padding: 200px;
+    padding: .6rem;
+    min-width: 400px;
 
-    centerbox {
-      margin: 2.5px;
+    // min-height: 200px;
+
+    box.cover-art {
+        min-width: 120px;
+        min-height: 120px;
+        border-radius: 5px;
+        margin-right: .6rem;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: mocha.$surface0;
     }
-  }
 
-  // margin: 50px;
-  border-radius: 10px;
-  background-color: rgba($color: #6C7086, $alpha: 0.6);
+    box.title label {
+        font-weight: bold;
+        font-size: 1em;
+    }
 
+    scale {
+        padding: 0;
+        margin: .7rem 0;
+
+        trough {
+            min-height: 8px;
+            border-radius: 10px;
+        }
+
+        highlight {
+            background-color: mocha.$base;
+            border-radius: 10px;
+        }
+    }
+
+
+    centerbox.actions {
+        button {
+            min-width: 0;
+            min-height: 0;
+            padding: .4rem;
+            margin: 0 .2rem;
+            background-color: mocha.$base;
+            border: 2px solid mocha.$surface0;
+            border-radius: 100%;
+
+            &:hover {
+                border-color: mocha.$mauve;
+            }
+        }
+    }
+}
+
+.Tray {
+
+    padding: 0.6rem;
+
+    .item {
+        min-width: 0;
+        min-height: 0;
+        padding: 0.2em;
+        border-radius: 100%;
+        background-color: mocha.$base;
+        margin: 0px 2.5px;
+
+        &:hover {
+            background-color: mocha.$mauve;
+        }
+
+        icon {
+            font-size: 2em;
+        }
+    }
 }

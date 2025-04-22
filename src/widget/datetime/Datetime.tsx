@@ -9,7 +9,6 @@ function Time({ format = "%T" }) {
     className = "Time"
     onDestroy = { () => time.drop() }
     label = { time() }
-    hexpand
   />
 }
 
@@ -26,11 +25,12 @@ function Date({ format = "%B, %e, %Y" }) {
 
 
 export default function Datetime() {
-  return <centerbox
-    className = "Datetime"
+  return <box
+    className = "Datetime WidgetContainer"
     vertical
+    hexpand
   >
     <Time />
     <Date />
-  </centerbox>
+  </box>
 }

@@ -1,4 +1,5 @@
 import { exec, subprocess, Variable } from "astal";
+import { Gtk } from "astal/gtk3";
 
 const OPEN_EYE = "xapp-prefs-display-symbolic";
 const CLOSED_EYE = "image-red-eye-symbolic";
@@ -28,11 +29,13 @@ export default function InhibitIdleButton(): JSX.Element {
 	const icon = Variable(isHypridleRunning() ? CLOSED_EYE : OPEN_EYE);
 
 	return <button
-    className="IdleInhibitor"
     onClicked={() => {
       toggleHypridle();
       icon.set(isHypridleRunning() ? CLOSED_EYE : OPEN_EYE);
     }}
+    valign={ Gtk.Align.CENTER }
+    halign={ Gtk.Align.CENTER }
+    
   >
     <icon icon={icon(String)} />
   </button>

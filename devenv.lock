@@ -8,10 +8,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1738087375,
+        "lastModified": 1744557573,
         "owner": "aylur",
         "repo": "ags",
-        "rev": "a6a7a0adb17740f4c34a59902701870d46fbb6a4",
+        "rev": "3ed9737bdbc8fc7a7c7ceef2165c9109f336bff6",
         "type": "github"
       },
       "original": {
@@ -28,10 +28,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1744127010,
+        "lastModified": 1745067202,
         "owner": "aylur",
         "repo": "astal",
-        "rev": "3ac89cab8a2a9f5ef86dc9fdc3a3dce2188ca8f7",
+        "rev": "c96126c7e261737270ad7ae35b27674c318648e6",
         "type": "github"
       },
       "original": {
@@ -47,10 +47,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1744294036,
+        "lastModified": 1745067202,
         "owner": "aylur",
         "repo": "astal",
-        "rev": "8f020e6d663d4222234826b51f2eb9e01db340a2",
+        "rev": "c96126c7e261737270ad7ae35b27674c318648e6",
         "type": "github"
       },
       "original": {
@@ -62,10 +62,10 @@
     "devenv": {
       "locked": {
         "dir": "src/modules",
-        "lastModified": 1744228912,
+        "lastModified": 1745020394,
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "e077ae7326e3867e6857247da9de951cb57d66a4",
+        "rev": "6599a8c6d02c1d37fe5b7804f70a39c262298729",
         "type": "github"
       },
       "original": {

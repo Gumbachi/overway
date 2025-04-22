@@ -3,15 +3,15 @@ import SystemControls from "./system-controls/SystemControls";
 import Datetime from "./datetime/Datetime";
 import MprisPlayers from "./media-player/MediaPlayer";
 import VolumeControls from "./volume-controls/VolumeControls";
-import VolumeMixer from "./volume-controls/VolumeMixer";
+import Tray from "./tray/Tray";
 
 export default function Overway() {
 	return <window
     // visible
     className="Overway"
     name="overway"
-    exclusivity={Astal.Exclusivity.IGNORE}
-    layer={Astal.Layer.TOP}
+    exclusivity={Astal.Exclusivity.EXCLUSIVE}
+    layer={Astal.Layer.OVERLAY}
     keymode={Astal.Keymode.ON_DEMAND}
     application={App}
     onKeyPressEvent={(self, event: Gdk.Event) => {
@@ -19,16 +19,22 @@ export default function Overway() {
     }}
   >
     
-    <box vertical className="container">
-      <centerbox>
+    <box vertical className="WindowContainer">
+
+      <box className="WidgetRow">
         <VolumeControls />
         <MprisPlayers />
-      </centerbox>
+      </box>
 
-      <centerbox>
-        <Datetime />
+      <box className="WidgetRow">
+        <Datetime />  
         <SystemControls />
-      </centerbox>
+      </box>
+
+      <box className="WidgetRow">
+        <Tray />
+      </box>
+
 
     </box>
   </window>

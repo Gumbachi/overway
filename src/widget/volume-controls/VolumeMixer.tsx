@@ -13,8 +13,8 @@ export default function VolumeMixer() {
     visible={showVolumeMixer()}
     // className="VolumeMixer"
     application={App}
-    layer={Astal.Layer.TOP}
-    exclusivity={Astal.Exclusivity.EXCLUSIVE}
+    layer={Astal.Layer.OVERLAY}
+    exclusivity={Astal.Exclusivity.IGNORE}
     keymode={Astal.Keymode.EXCLUSIVE}
     onKeyPressEvent={(self, event: Gdk.Event) => {
       if (event.get_keyval()[1] === Gdk.KEY_Escape) { 

@@ -3,16 +3,16 @@ import Mpris from "gi://AstalMpris"
 import { bind } from "astal"
 
 function lengthStr(length: number) {
-    const min = Math.floor(length / 60)
-    const sec = Math.floor(length % 60)
-    const sec0 = sec < 10 ? "0" : ""
-    return `${min}:${sec0}${sec}`
+  const min = Math.floor(length / 60)
+  const sec = Math.floor(length % 60)
+  const sec0 = sec < 10 ? "0" : ""
+  return `${min}:${sec0}${sec}`
 }
 
 
 function MediaPlayer({ player }: { player: Mpris.Player }) {
 
-  const { START, END } = Gtk.Align
+  const { START, END, CENTER } = Gtk.Align
 
   const title = bind(player, "title").as(t => t || "Unknown Track")
 
@@ -32,59 +32,73 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
       : "media-playback-start-symbolic"
   )
 
-    return <box className="MediaPlayer" valign={ Gtk.Align.END }>
-        <box className="cover-art" css={coverArt} />
-        <box vertical>
-            <box className="title">
-                <label truncate hexpand halign={START} label={title} />
-                <icon icon={playerIcon} />
-            </box>
-            <label halign={START} valign={START} vexpand wrap label={artist} />
-            <slider
-                visible={bind(player, "length").as(l => l > 0)}
-                onDragged={({ value }) => player.position = value * player.length}
-                value={position}
-            />
-            <centerbox className="actions">
-                <label
-                    hexpand
-                    className="position"
-                    halign={START}
-                    visible={bind(player, "length").as(l => l > 0)}
-                    label={bind(player, "position").as(lengthStr)}
-                />
-                <box>
-                    <button
-                        onClicked={() => player.previous()}
-                        visible={bind(player, "canGoPrevious")}>
-                        <icon icon="media-skip-backward-symbolic" />
-                    </button>
-                    <button
-                        onClicked={() => player.play_pause()}
-                        visible={bind(player, "canControl")}>
-                        <icon icon={playIcon} />
-                    </button>
-                    <button
-                        onClicked={() => player.next()}
-                        visible={bind(player, "canGoNext")}>
-                        <icon icon="media-skip-forward-symbolic" />
-                    </button>
-                </box>
-                <label
-                    className="length"
-                    hexpand
-                    halign={END}
-                    visible={bind(player, "length").as(l => l > 0)}
-                    label={bind(player, "length").as(l => l > 0 ? lengthStr(l) : "0:00")}
-                />
-            </centerbox>
+    return <box className="MediaPlayer">
+
+      <box className="cover-art" css={coverArt} valign={CENTER} />
+
+      <box vertical>
+
+        <box className="title">
+          <label truncate hexpand halign={START} label={title} />
+          <icon icon={playerIcon}/>
         </box>
+
+        <label halign={START} valign={START} vexpand wrap label={artist} />
+        <slider
+          visible={bind(player, "length").as(l => l > 0)}
+          onDragged={({ value }) => player.position = value * player.length}
+          value={position}
+        />
+
+        <centerbox className="actions">
+
+          <label
+            className="position"
+            halign={START}
+            visible={bind(player, "length").as(l => l > 0)}
+            label={bind(player, "position").as(lengthStr)}
+          />
+
+          <box>
+
+            <button
+              onClicked={() => player.previous()}
+              visible={bind(player, "canGoPrevious")}
+            >
+              <icon icon="media-skip-backward-symbolic" />
+            </button>
+
+            <button
+              onClicked={() => player.play_pause()}
+              visible={bind(player, "canControl")}
+            >
+              <icon icon={playIcon} />
+            </button>
+
+            <button
+              onClicked={() => player.next()}
+              visible={bind(player, "canGoNext")}
+            >
+              <icon icon="media-skip-forward-symbolic" />
+            </button>
+
+          </box>
+
+          <label
+              className="length"
+              halign={END}
+              visible={bind(player, "length").as(l => l > 0)}
+              label={bind(player, "length").as(l => l > 0 ? lengthStr(l) : "0:00")}
+          />
+        </centerbox>
+
+      </box>
     </box>
 }
 
 export default function MprisPlayers() {
   const mpris = Mpris.get_default()
-  return <box vertical>
+  return <box vertical className="WidgetContainer" valign={ Gtk.Align.END }>
     { 
       bind(mpris, "players").as(arr => arr
         .filter(player => !player.busName.endsWith("playerctld"))
