@@ -3,6 +3,14 @@
 // Border size = 4
 // gaps 5
 
+$fg-color: #{"@theme_fg_color"};
+$bg-color: #{"@theme_bg_color"};
+$accent-color: #{"@accent_color"};
+$text-color: #{"@theme_text_color"};
+$border-color: #{"@borders"};
+$unfocused-border-color: #{"@unfocused_borders"};
+
+
 $widget-border-width: 4px;
 $widget-margin: 2.5px;
 $widget-padding: 0.6rem;
@@ -14,13 +22,13 @@ $button-margin: 2.5px;
     min-width: 0;
     min-height: 0;
     border-radius: 100%;
-    background-color: mocha.$base;
-    border: $button-border-width solid mocha.$surface0;
+    background-color: $bg-color;
+    border: $button-border-width solid $unfocused-border-color;
     margin: $button-margin;
     padding: $padding;
 
     &:hover {
-        border-color: mocha.$mauve
+        border-color: $accent-color
     }
 
     icon {
@@ -31,7 +39,14 @@ $button-margin: 2.5px;
 
 // Hide keyboard hinting
 * button:focus {
+    outline: none;
     box-shadow: none;
+}
+
+* scale:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
 }
 
 // OVERWAY: MAIN WINDOW
@@ -45,8 +60,8 @@ $button-margin: 2.5px;
     }
 
     .WidgetContainer {
-        background-color: mocha.$base;
-        border: $widget-border-width solid mocha.$surface0;
+        background-color: $bg-color;
+        border: $widget-border-width solid $unfocused-border-color; // mocha.$surface0;
         border-radius: 10px;
         margin: $widget-margin;
         padding: $widget-padding
@@ -78,9 +93,9 @@ $button-margin: 2.5px;
 .VolumeMixer {
     min-width: 600px;
 
-    background-color: mocha.$surface0;
+    // background-color: mocha.$surface0;
 
-    border: 4px solid mocha.$surface1;
+    border: 4px solid;
     border-radius: 10px;
 
     .StreamSource {
@@ -96,10 +111,10 @@ $button-margin: 2.5px;
 
     .MixerEntry {
         border-radius: 10px;
-        background-color: mocha.$surface1;
+        // background-color: mocha.$surface1;
         padding: 10px 0px;
         margin: 5px 0px;
-        box-shadow: 1px 1px 2px mocha.$base;
+        // box-shadow: 1px 1px 2px;
     }
 
     scale {
@@ -112,11 +127,11 @@ $button-margin: 2.5px;
 .VolumeControls {
 
     button {
-        @include circle-button($padding: 0.5em, $icon-size: 1.2em);
+        @include circle-button($padding: 0.4em, $icon-size: 1em);
     }
 
     .ShowMixerButton {
-        background-color: mocha.$base;
+        // background-color: mocha.$base;
         border-radius: 10px;
         margin-bottom: 2px;
     }
@@ -155,7 +170,7 @@ $button-margin: 2.5px;
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
-        background-color: mocha.$surface0;
+        // background-color: mocha.$surface0;
     }
 
     box.title label {
@@ -173,7 +188,6 @@ $button-margin: 2.5px;
         }
 
         highlight {
-            background-color: mocha.$base;
             border-radius: 10px;
         }
     }
