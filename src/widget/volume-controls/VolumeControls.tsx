@@ -26,10 +26,13 @@ function VolumeControlEntry(device: Wp.Endpoint) {
   }
 
   function getIcon(device: Wp.Endpoint) {
-    const prefix = device === speaker ? "audio-volume" : "microphone-sensitivity"
+
     return Variable.derive(
-      [bind(device, "volume"), bind(device, "volumeIcon")],
-      (vol, icon) => vol === 0 ? `${prefix}-muted-symbolic` : icon
+      [bind(device, "volume"), bind(device, "volumeIcon"), bind(device, "mediaClass")],
+      (vol, icon, mediaClass) => {
+        let prefix = mediaClass == Wp.MediaClass.AUDIO_SPEAKER ? "audio-volume" : "microphone-sensitivity"
+        return vol === 0 ? `${prefix}-muted-symbolic` : icon 
+      }
     )
   }
 
