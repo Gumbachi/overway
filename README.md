@@ -1,2 +1,5 @@
 # Overway
-Desktop overlay for Wayland. Built using Astal and GTK4.
+
+Desktop overlay for Wayland. Built using Astal.
+
+![Screenshot of Program](assets/screenshot.png)
