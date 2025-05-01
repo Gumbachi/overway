@@ -1,0 +1,40 @@
+@use "../../variables" as *;
+
+.MediaPlayer {
+
+    min-width: 400px;
+
+    box.cover-art {
+        min-width: 120px;
+        min-height: 120px;
+        border-radius: 5px;
+        margin-right: .6rem;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        // background-color: mocha.$surface0;
+    }
+
+    box.title label {
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    scale {
+        padding: 0;
+        margin: .7rem 0;
+
+        trough {
+            min-height: 8px;
+            border-radius: 10px;
+        }
+
+        highlight {
+            border-radius: 10px;
+        }
+    }
+
+    centerbox.actions button {
+        @include circle-button($padding: 0.4rem);
+    }
+}

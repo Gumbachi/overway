@@ -8,7 +8,7 @@
   # https://devenv.sh/packages/
   packages = with pkgs; [
     inputs.ags.packages.${system}.agsFull
-    # inputs.astal.packages.${system}.hyprland
+    inputs.astal.packages.${system}.notifd
     # inputs.astal.packages.${system}.mpris
     # inputs.astal.packages.${system}.tray
     # inputs.astal.packages.${system}.network

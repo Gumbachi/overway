@@ -1,0 +1,34 @@
+@use "../../variables" as *;
+
+.VolumeControls {
+
+    button {
+        @include circle-button($padding: 0.4em, $icon-size: 1em);
+    }
+
+    .ShowMixerButton {
+        // background-color: mocha.$base;
+        border-radius: 10px;
+        margin-bottom: 2px;
+    }
+
+    label {
+        min-width: 2em;
+        font-weight: bold;
+        padding-left: 10px;
+    }
+
+    scale {
+        min-width: 8em;
+
+        // margin: 1em
+        highlight {
+            border-radius: 10px;
+        }
+
+        trough {
+            border-radius: 10px;
+            min-height: 4px;
+        }
+    }
+}

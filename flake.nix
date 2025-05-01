@@ -28,6 +28,7 @@
         tray
         hyprland
         wireplumber
+        notifd
       ];
     };
   };

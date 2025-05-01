@@ -1,9 +1,9 @@
 import { Astal, App, Gdk } from "astal/gtk3";
-import SystemControls from "./system-controls/SystemControls";
-import Datetime from "./datetime/Datetime";
-import MprisPlayers from "./media-player/MediaPlayer";
-import VolumeControls from "./volume-controls/VolumeControls";
-import Tray from "./tray/Tray";
+import SystemControls from "../system-controls/SystemControls";
+import Datetime from "../datetime/Datetime";
+import MprisPlayers from "../media-player/MediaPlayer";
+import VolumeControls from "../volume-controls/VolumeControls";
+import Tray from "../tray/Tray";
 
 export default function Overway() {
 	return <window

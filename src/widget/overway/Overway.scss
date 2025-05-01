@@ -1,0 +1,19 @@
+@use "../../variables" as *;
+
+.Overway {
+
+    border-radius: 10px;
+    background-color: rgba($color: #6C7086, $alpha: 0.6);
+
+    .WindowContainer {
+        padding: 50px;
+    }
+
+    .WidgetContainer {
+        background-color: $bg-color;
+        border: $widget-border-width solid $unfocused-border-color; // mocha.$surface0;
+        border-radius: 10px;
+        margin: $widget-margin;
+        padding: $widget-padding
+    }
+}

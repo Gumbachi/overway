@@ -1,0 +1,7 @@
+@use "../../variables" as *;
+
+.SystemControls {
+    button {
+        @include circle-button($icon-size: 2em);
+    }
+}
