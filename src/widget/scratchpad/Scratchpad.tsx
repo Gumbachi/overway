@@ -8,7 +8,7 @@ function SimpleCounter(label: string = "Counter"): JSX.Element {
   const counter = Variable(0)
 
   function AddButton(value: number) {
-    return <button onClick={ () => counter.set(counter.get() + value) }>
+    return <button onClicked={ () => counter.set(counter.get() + value) }>
       <label 
         label={ value >= 0 ? `+${value}` : `${value}`}
         halign={Gtk.Align.CENTER}
@@ -62,10 +62,10 @@ function Header(title: string, reset: () => void, destroy: () => void) {
   >
     <box className="header" halign={Gtk.Align.FILL}>
       <label label={title} hexpand halign={Gtk.Align.START} />
-      <button onClick={ reset } halign={Gtk.Align.END} visible={ bind(showControls) }>
+      <button onClicked={ reset } halign={Gtk.Align.END} visible={ bind(showControls) }>
         <icon icon="edit-clear-all-symbolic"/>
       </button>
-      <button onClick={ () => destroy } halign={Gtk.Align.END} visible={ bind(showControls) }>
+      <button onClicked={ () => destroy } halign={Gtk.Align.END} visible={ bind(showControls) }>
         <icon icon="edit-delete-symbolic"/>
       </button>
     </box>
@@ -81,15 +81,15 @@ function AddActions() {
     valign={Gtk.Align.END}
   >
 
-    <button onClick={ () => widgets.set(widgets.get().concat([SimpleNote()])) }>
+    <button onClicked={ () => widgets.set(widgets.get().concat([SimpleNote()])) }>
       <icon icon="edit-symbolic" />
     </button>
 
-    <button onClick={ () => widgets.set(widgets.get().concat([SimpleCounter()]))  }>
+    <button onClicked={ () => widgets.set(widgets.get().concat([SimpleCounter()]))  }>
       <icon icon="numlock-enabled-symbolic" />
     </button>
 
-    <button onClick={ () => print(widgets.get())  }>
+    <button onClicked={ () => print(widgets.get())  }>
       <icon icon="numlock-enabled-symbolic" />
     </button>
 

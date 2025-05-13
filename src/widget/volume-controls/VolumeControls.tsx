@@ -37,7 +37,7 @@ function VolumeControlEntry(device: Wp.Endpoint) {
   }
 
   return <box className="VolumeControlEntry">
-    <button valign={ Gtk.Align.CENTER } onClick={ toggleMute(device) }>
+    <button valign={ Gtk.Align.CENTER } onClicked={ toggleMute(device) }>
       <icon icon={ bind(getIcon(device)) }  />
     </button>
     <label 

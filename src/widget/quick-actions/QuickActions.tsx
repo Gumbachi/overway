@@ -2,7 +2,7 @@ import { Gtk } from "astal/gtk3";
 import { showVolumeMixer } from "../../data/config";
 
 function QuickActionButton(label: string, onClick: () => void) {
-  return <button className="quick-action-button" onClick={ onClick }>
+  return <button className="quick-action-button" onClicked={ onClick }>
     <label label={label} /> 
   </button>
 }
