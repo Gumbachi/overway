@@ -4,13 +4,8 @@ import Overway from "./widget/overway/Overway"
 import VolumeMixer from "./widget/volume-controls/VolumeMixer"
 import NotificationPopups from "./widget/notifications/NotificationPopups"
 import QuickActions from "./widget/quick-actions/QuickActions"
-import { exec, readFile, writeFile } from "astal"
+import { readFile, writeFile } from "astal"
 import { configPath, defaultConfig } from "./data/config"
-
-
-function initOverway() {
-  // Init config file if it doesnt exist
-}
 
 App.start({
   css: style,
