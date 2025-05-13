@@ -53,28 +53,28 @@ function VolumeControlEntry(device: Wp.Endpoint) {
   </box>
 }
 
+
+    // <button 
+    //   className="ShowMixerButton"
+    //   onClick={() => showVolumeMixer.set(!showVolumeMixer.get()) }
+    // >
+    //   <box halign={ Gtk.Align.CENTER } hexpand>
+    //     <icon icon="multimedia-equalizer-symbolic" />
+    //     <label label="Volume Mixer" />
+    //   </box>
+    // </button>
+
 export default function VolumeControls() {
 
   return <box 
     className="VolumeControls WidgetContainer"
     vertical
+    homogeneous
     // valign={ Gtk.Align.END }
   >    
 
-    <button 
-      className="ShowMixerButton"
-      onClick={() => showVolumeMixer.set(!showVolumeMixer.get()) }
-    >
-      <box halign={ Gtk.Align.CENTER } hexpand>
-        <icon icon="multimedia-equalizer-symbolic" />
-        <label label="Volume Mixer" />
-      </box>
-    </button>
-
-    <box vertical vexpand homogeneous valign={Gtk.Align.FILL}> 
-      {VolumeControlEntry(mic)}
-      {VolumeControlEntry(speaker)}
-    </box>
+    { VolumeControlEntry(mic) }
+    { VolumeControlEntry(speaker) }
 
   </box>
 

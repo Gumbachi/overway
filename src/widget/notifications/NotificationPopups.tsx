@@ -10,7 +10,7 @@ const TIMEOUT_DELAY = 5000
 // The purpose if this class is to replace Variable<Array<Widget>>
 // with a Map<number, Widget> type in order to track notification widgets
 // by their id, while making it conviniently bindable as an array
-class NotifiationMap implements Subscribable {
+export class NotificationMap implements Subscribable {
     // the underlying map to keep track of id widget pairs
     private map: Map<number, Gtk.Widget> = new Map()
 
@@ -19,11 +19,11 @@ class NotifiationMap implements Subscribable {
     private var: Variable<Array<Gtk.Widget>> = Variable([])
 
     // notify subscribers to rerender when state changes
-    private notifiy() {
+    private notify() {
         this.var.set([...this.map.values()].reverse())
     }
 
-    constructor() {
+    constructor(onHoverLost = (id: number) => this.delete(id)) {
         const notifd = Notifd.get_default()
 
         /**
@@ -43,7 +43,7 @@ class NotifiationMap implements Subscribable {
                 // so that it acts as a "popup" and we can still display it
                 // in a notification center like widget
                 // but clicking on the close button will close it
-                onHoverLost: () => this.delete(id),
+                onHoverLost: () => onHoverLost(id),
 
                 // notifd by default does not close notifications
                 // until user input or the timeout specified by sender
@@ -69,13 +69,13 @@ class NotifiationMap implements Subscribable {
         // in case of replacecment destroy previous widget
         this.map.get(key)?.destroy()
         this.map.set(key, value)
-        this.notifiy()
+        this.notify()
     }
 
     private delete(key: number) {
         this.map.get(key)?.destroy()
         this.map.delete(key)
-        this.notifiy()
+        this.notify()
     }
 
     // needed by the Subscribable interface
@@ -91,7 +91,7 @@ class NotifiationMap implements Subscribable {
 
 export default function NotificationPopups(gdkmonitor: Gdk.Monitor) {
     const { TOP, RIGHT } = Astal.WindowAnchor
-    const notifs = new NotifiationMap()
+    const notifs = new NotificationMap()
 
     return <window
         className="NotificationPopups"

@@ -6,6 +6,9 @@
 @use "widget/volume-controls/VolumeControls";
 @use "widget/volume-controls/VolumeMixer";
 @use "widget/notifications/Notification";
+@use "widget/notifications/NotificationTray";
+@use "widget/quick-actions/QuickActions";
+@use "widget/scratchpad/Scratchpad";
 
 // Hide keyboard hinting
 * button:focus {

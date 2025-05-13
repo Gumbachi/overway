@@ -1,0 +1,6 @@
+@use "../../variables" as *;
+
+.NotificationTray {
+    @include widget-container;
+    min-width: $notification-width;
+}

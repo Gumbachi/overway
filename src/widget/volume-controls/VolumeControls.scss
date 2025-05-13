@@ -3,7 +3,7 @@
 .VolumeControls {
 
     button {
-        @include circle-button($padding: 0.4em, $icon-size: 1em);
+        @include circle-button($padding: 0.6em, $icon-size: 1.2em);
     }
 
     .ShowMixerButton {
@@ -16,6 +16,7 @@
         min-width: 2em;
         font-weight: bold;
         padding-left: 10px;
+        font-size: 1.2em;
     }
 
     scale {

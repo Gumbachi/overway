@@ -1,0 +1,16 @@
+@use "../../variables" as *;
+
+.quick-actions {
+
+    @include widget-container;
+
+    >button {
+        margin: 0px 2px;
+        background-color: $bg-color;
+        border: $button-border-width solid $unfocused-border-color;
+
+        &:hover {
+            border-color: $border-color;
+        }
+    }
+}

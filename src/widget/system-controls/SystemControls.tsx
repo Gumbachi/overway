@@ -5,7 +5,6 @@ import RotateWallpaperButton from "./RotateWallpaper";
 
 export default function SystemControls() {
 	return <box className="SystemControls WidgetContainer" homogeneous>
-    <RotateWallpaperButton />
     <NightlightButton />
     <InhibitIdleButton />
     <LockButton />

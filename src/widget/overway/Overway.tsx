@@ -4,6 +4,9 @@ import Datetime from "../datetime/Datetime";
 import MprisPlayers from "../media-player/MediaPlayer";
 import VolumeControls from "../volume-controls/VolumeControls";
 import Tray from "../tray/Tray";
+import NotificationTray from "../notifications/NotificationTray";
+import QuickActions from "../quick-actions/QuickActions";
+import Scratchpad from "../scratchpad/Scratchpad";
 
 export default function Overway() {
 	return <window
@@ -19,24 +22,30 @@ export default function Overway() {
     }}
   >
     
-    <box vertical className="WindowContainer">
+    <box className="WindowContainer">
 
-      <box className="WidgetRow">
-        <VolumeControls />
-        <MprisPlayers />
-      </box>
+      <Scratchpad />
 
-      <box className="WidgetRow">
-        <Datetime />  
-        <SystemControls />
-      </box>
+      <box vertical>
 
-      <box className="WidgetRow">
+        <QuickActions />
+
+        <box className="WidgetRow">
+          <VolumeControls />
+          <MprisPlayers />
+        </box>
+
+        <box className="WidgetRow">
+          <Datetime />  
+          <SystemControls />
+        </box>
+
         <Tray />
-      </box>
 
+      </box>
 
     </box>
+    
   </window>
 }
 

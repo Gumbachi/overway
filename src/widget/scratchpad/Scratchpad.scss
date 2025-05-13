@@ -1,0 +1,61 @@
+@use "../../variables" as *;
+
+.scratchpad {
+    @include widget-container;
+
+    .simple-counter {
+        margin-bottom: 10px;
+    }
+
+    .header {
+
+        margin: 2.5px 0px;
+
+        label {
+            padding: 2.5px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        button {
+            min-width: 0;
+            min-height: 0;
+            border-radius: 100%;
+            padding: 0.2em;
+            background-color: $bg-color;
+
+            icon {
+                font-size: 1em;
+            }
+        }
+    }
+
+    .counter {
+        .value {
+            font-weight: bold;
+            font-size: 1.5em;
+            min-width: 2.2em;
+        }
+
+        button {
+            @include circle-button($padding: 0.1em);
+            label {
+                min-width: 2em;
+                min-height: 2em;
+                font-size: 1em;
+            }
+        }
+    }
+
+    .simple-note {
+        min-width: 200px;
+
+        .note-container {
+            border: 2px solid $unfocused-border-color;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+    }
+
+}

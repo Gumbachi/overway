@@ -1,9 +1,6 @@
 @use "sass:string";
 @use "../../variables" as *;
 
-@function gtkalpha($c, $a) {
-    @return string.unquote("alpha(#{$c},#{$a})");
-}
 
 window.NotificationPopups {
     all: unset;
@@ -29,7 +26,7 @@ eventbox.Notification {
         border-radius: $widget-border-radius;
         background-color: $bg-color;
         margin: 0.2rem 1.5rem;
-        min-width: 400px;
+        min-width: $notification-width;
         box-shadow: 2px 3px 8px 0 $bg-color;
     }
 
