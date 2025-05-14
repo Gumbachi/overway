@@ -98,7 +98,7 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
 
 export default function MprisPlayers() {
   const mpris = Mpris.get_default()
-  return <box vertical className="WidgetContainer" valign={ Gtk.Align.END }>
+  return <box vertical valign={ Gtk.Align.END }>
     { 
       bind(mpris, "players").as(arr => arr
         .filter(player => !player.busName.endsWith("playerctld"))

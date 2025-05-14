@@ -21,7 +21,7 @@ function TrayItem(item: AstalTray.TrayItem) {
 }
 
 export default function Tray() {
-  return <box className="Tray WidgetContainer" hexpand>
+  return <box className="Tray" hexpand>
     { bind(tray, "items").as(items => items.map(TrayItem)) }
   </box>
 }

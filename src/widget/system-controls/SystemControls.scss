@@ -1,6 +1,9 @@
 @use "../../variables" as *;
 
 .SystemControls {
+
+    @include widget-container;
+
     button {
         @include circle-button($icon-size: 2em);
     }

@@ -2,6 +2,8 @@
 
 .VolumeControls {
 
+    @include widget-container;
+
     button {
         @include circle-button($padding: 0.6em, $icon-size: 1.2em);
     }
@@ -17,6 +19,7 @@
         font-weight: bold;
         padding-left: 10px;
         font-size: 1.2em;
+        color: $text-color;
     }
 
     scale {

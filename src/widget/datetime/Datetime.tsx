@@ -25,7 +25,7 @@ function Date({ format = "%B, %d, %Y" }) {
 
 export default function Datetime() {
 	return (
-		<box className="Datetime WidgetContainer" vertical hexpand>
+		<box className="Datetime" vertical hexpand>
 			<Time />
 			<Date />
 		</box>

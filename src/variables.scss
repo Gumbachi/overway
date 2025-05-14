@@ -4,15 +4,15 @@
     @return string.unquote("alpha(#{$c},#{$a})");
 }
 
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
+$fg-color: #{"@window_fg_color"};
+$bg-color: #{"@window_bg_color"};
 $accent-color: #{"@accent_color"};
-$text-color: #{"@theme_text_color"};
-$border-color: #{"@accent_color"};
-$unfocused-border-color: #{"@unfocused_borders"};
+$text-color: #{"@view_fg_color"};
+$border-color: #{"@scrollbar_outline_color"};
 
 // At the bottom of the page
 // https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.6/css-variables.html
+// https://github.com/danth/stylix/blob/98444a942a85072baf12c4a1c4cd5ef9531c8ab0/modules/gtk/gtk.css.mustache 
 
 $scrim-color: gtkalpha($fg-color, 0.3); // rgba($color: #6C7086, $alpha: 0.6);
 
@@ -27,7 +27,6 @@ $button-margin: 2.5px;
 $notification-width: 400px;
 
 $error: #{"@error_color"};
-
 $red: #{"@red_1"};
 
 
@@ -36,23 +35,23 @@ $red: #{"@red_1"};
     min-height: 0;
     border-radius: 100%;
     background-color: $bg-color;
-    border: $button-border-width solid $unfocused-border-color;
+    border: $button-border-width solid $border-color;
     margin: $button-margin;
     padding: $padding;
 
     &:hover {
-        border-color: $accent-color
+        border-color: $accent-color;
     }
 
     icon {
-        font-size: $icon-size
+        font-size: $icon-size;
     }
 }
 
 @mixin widget-container {
     background-color: $bg-color;
-    border: $widget-border-width solid $unfocused-border-color;
+    border: $widget-border-width solid $border-color;
     border-radius: 10px;
     margin: $widget-margin;
-    padding: $widget-padding
+    padding: $widget-padding;
 }

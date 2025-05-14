@@ -67,7 +67,7 @@ function VolumeControlEntry(device: Wp.Endpoint) {
 export default function VolumeControls() {
 
   return <box 
-    className="VolumeControls WidgetContainer"
+    className="VolumeControls"
     vertical
     homogeneous
     // valign={ Gtk.Align.END }

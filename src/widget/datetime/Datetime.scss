@@ -1,4 +1,8 @@
+
+@use "../../variables" as *;
+
 .Datetime {
+    @include widget-container;
 
     .Time {
         font-weight: bold;

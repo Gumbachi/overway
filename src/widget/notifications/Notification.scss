@@ -22,7 +22,7 @@ eventbox.Notification {
 
     // eventboxes can not take margins so we style its inner box instead
     >box {
-        border: $widget-border-width solid $unfocused-border-color;
+        border: $widget-border-width solid $border-color;
         border-radius: $widget-border-radius;
         background-color: $bg-color;
         margin: 0.2rem 1.5rem;

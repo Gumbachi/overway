@@ -1,6 +1,7 @@
 @use "../../variables" as *;
 
 .MediaPlayer {
+    @include widget-container;
 
     min-width: 400px;
 

@@ -4,7 +4,7 @@ import { LockButton, RestartButton, ShutdownButton } from "./Power";
 import RotateWallpaperButton from "./RotateWallpaper";
 
 export default function SystemControls() {
-	return <box className="SystemControls WidgetContainer" homogeneous>
+	return <box className="SystemControls" homogeneous>
     <NightlightButton />
     <InhibitIdleButton />
     <LockButton />

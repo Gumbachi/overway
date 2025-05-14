@@ -2,18 +2,19 @@
 
 .Overway {
 
-    border-radius: 10px;
     background-color: $scrim-color;
+    border-radius: 10px;
+
+    * label {
+        color: $text-color;
+    }
+
+    * icon {
+        color: $text-color
+    }
 
     .WindowContainer {
         padding: 50px;
     }
 
-    .WidgetContainer {
-        background-color: $bg-color;
-        border: $widget-border-width solid $unfocused-border-color; // mocha.$surface0;
-        border-radius: 10px;
-        margin: $widget-margin;
-        padding: $widget-padding
-    }
 }
