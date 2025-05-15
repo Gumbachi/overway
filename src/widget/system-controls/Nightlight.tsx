@@ -1,35 +1,36 @@
 import { bind, exec, Variable } from "astal";
 import { Gtk } from "astal/gtk3";
 
+const nightlightService = "wlsunset"
+
 export function NightlightButton() {
-	function hyprsunsetStatus(): Boolean {
+	function nightlightStatus(): Boolean {
     try {
-      return exec("systemctl is-active --user hyprsunset") == "active"
+      return exec(`systemctl is-active --user ${nightlightService}`) == "active"
     } catch {
       return false
     }
 	}
 
-  function toggleHyprsunset() {
-    
-		if (hyprsunsetStatus()) {
-			exec("systemctl stop --user hyprsunset");
+  function toggleNightlight() { 
+		if (nightlightStatus()) {
+			exec(`systemctl stop --user ${nightlightService}`);
 		} else {
-			exec("systemctl start --user hyprsunset");
+			exec(`systemctl start --user ${nightlightService}`);
 		}
 	}
 
   const SUN = "weather-clear-symbolic"
   const MOON = "weather-clear-night-symbolic"
 
-  const icon = Variable(hyprsunsetStatus() ? MOON : SUN)
+  const icon = Variable(nightlightStatus() ? MOON : SUN)
 
   return <button 
     valign={ Gtk.Align.CENTER }
     halign={ Gtk.Align.CENTER }
     onClicked={ () => {
-      toggleHyprsunset()
-      icon.set(hyprsunsetStatus() ? MOON : SUN)
+      toggleNightlight()
+      icon.set(nightlightStatus() ? MOON : SUN)
     }}
   >
     <icon icon={ bind(icon) } />
