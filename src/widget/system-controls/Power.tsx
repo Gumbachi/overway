@@ -2,7 +2,7 @@ import { Gtk } from "astal/gtk3";
 
 export function LockButton() {
 	return <button
-    onClicked="hyprlock"
+    onClicked="loginctl lock-session"
     valign={Gtk.Align.CENTER}
     halign={Gtk.Align.CENTER}
   >
