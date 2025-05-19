@@ -31,12 +31,12 @@ export default function Overway() {
         <QuickActions />
 
         <box className="WidgetRow">
-          <VolumeControls />
+          <Datetime />  
           <MprisPlayers />
         </box>
 
         <box className="WidgetRow">
-          <Datetime />  
+          <VolumeControls />
           <SystemControls />
         </box>
 
