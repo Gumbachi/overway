@@ -9,6 +9,17 @@ function lengthStr(length: number) {
   return `${min}:${sec0}${sec}`
 }
 
+function NothingPlaying() {
+  return <label
+    className="nothing-playing"
+    expand label="Nothing Playing"
+    wrap
+    halign={Gtk.Align.CENTER}
+    valign={Gtk.Align.CENTER}
+    justify={Gtk.Justification.CENTER}
+  />
+}
+
 function MediaPlayerSwitcher({ selected, playerCount, onSelected }: { selected: number, playerCount: number, onSelected: (i: number) => void }) {
   return <box className="switcher" vertical valign={ Gtk.Align.CENTER }>
     { [...Array(playerCount).keys()].map(i => (
@@ -21,7 +32,6 @@ function MediaPlayerSwitcher({ selected, playerCount, onSelected }: { selected: 
     )) }
   </box>
 }
-
 
 function MediaPlayer({ player }: { player: Mpris.Player }) {
 
@@ -122,21 +132,21 @@ export default function MprisPlayers() {
 
   return <box className="MprisPlayers" valign={ Gtk.Align.END }>
     { 
-      bind(values)
-        .as(v => ({
-          "selected": v.selected,
-          "players": v.players.filter( player => !player.busName.endsWith("playerctld") )  
-        }))
-        .as(v => (
-          <box>
+      bind(values).as(v => ({
+        "selected": v.selected,
+        "players": v.players.filter( player => !player.busName.endsWith("playerctld") )  
+      })).as(v => {
+        if (v.players.length > 0)
+          return <box>
             <MediaPlayerSwitcher
               selected={ v.selected }
               playerCount={ v.players.length }
               onSelected={ value => playerIndex.set(value) }
-            />
+            /> 
             <MediaPlayer player={ v.players[v.selected] }/>
-          </box>
-        ))
+          </box>  
+        return (<NothingPlaying />)
+      }) 
     } 
   </box>
 }
