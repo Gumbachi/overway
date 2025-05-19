@@ -1,13 +1,12 @@
-import { bind, monitorFile, Variable } from "astal"
-import { Gtk } from "astal/gtk3"
+import { bind, Gio, Variable } from "astal"
+import { Gdk, Gtk } from "astal/gtk3"
 import { TextView } from "../../custom/TextView"
-
-const widgets: Variable<Array<Gtk.Widget>> = Variable([])
 
 function SimpleCounter(label: string = "Counter"): JSX.Element { 
   const counter = Variable(0)
+  const showActions = Variable(false)
 
-  function AddButton(value: number) {
+  function IncrementButton(value: number) {
     return <button onClicked={ () => counter.set(counter.get() + value) }>
       <label 
         label={ value >= 0 ? `+${value}` : `${value}`}
@@ -18,81 +17,74 @@ function SimpleCounter(label: string = "Counter"): JSX.Element {
     </button> 
   }
 
-  const widget = <box className="simple-counter" vertical>
-    { Header(label, () => counter.set(0), () => widget.destroy()) }
-    <box className="counter">
-      { AddButton(-20) }
-      { AddButton(-5) }
-      { AddButton(-1) } 
-      <label className="value" label={bind(counter).as(String)} />
-      { AddButton(1) }
-      { AddButton(5) }
-      { AddButton(20) } 
+  return <eventbox 
+    onHover={ () => showActions.set(true) }
+    onHoverLost={ () => showActions.set(false) }
+  >
+    <box className="simple-counter" vertical>
+      { Header(
+        label,
+        (
+          <button visible={ showActions() } onClicked={ () => counter.set(0) }>
+            <icon icon="view-refresh-symbolic"/>
+          </button>
+        )
+      ) }
+      <box className="counter">
+        { IncrementButton(-20) }
+        { IncrementButton(-5) }
+        { IncrementButton(-1) } 
+        <label className="value" label={bind(counter).as(String)} />
+        { IncrementButton(1) }
+        { IncrementButton(5) }
+        { IncrementButton(20) } 
+      </box>
     </box>
-  </box>
-
-  return widget
+  </eventbox>
 }
 
 
 function SimpleNote(label: string = "Quick Note") { 
+  const showActions = Variable(false)
+  const buffer = Variable(new Gtk.TextBuffer())
 
-  const widget = <box className="simple-note" vertical vexpand>
-      { Header(label, () => print("reset textbox to nothing"), () => widget.destroy()) }
+  return <eventbox 
+    onHover={ () => showActions.set(true) }
+    onHoverLost={ () => showActions.set(false) }
+  >
+    <box className="simple-note" vertical vexpand>
+      { Header(
+        label, 
+        (
+          <box visible={ showActions() }>
+            <button onClicked={ () => print("save") }>
+              <icon icon="document-save-symbolic"/>
+            </button>
+            
+            <button onClicked={ () => buffer.set(new Gtk.TextBuffer()) }>
+              <icon icon="view-refresh-symbolic"/>
+            </button>
+          </box>
+        )
+      )}
       <centerbox className="note-container" vexpand >
         <TextView 
           className="note"
           hexpand
           wrapMode={Gtk.WrapMode.WORD_CHAR}
+          buffer={ buffer() }
         />
       </centerbox>
     </box>
-
-  return widget
-}
-
-
-
-function Header(title: string, reset: () => void, destroy: () => void) {
-  const showControls = Variable(true)
-
-  const ebox = <eventbox
-    onHover={ () => showControls.set(true) }
-    onHoverLost={ () => showControls.set(true) }
-  >
-    <box className="header" halign={Gtk.Align.FILL}>
-      <label label={title} hexpand halign={Gtk.Align.START} />
-      <button onClicked={ reset } halign={Gtk.Align.END} visible={ bind(showControls) }>
-        <icon icon="edit-clear-all-symbolic"/>
-      </button>
-      <button onClicked={ () => destroy } halign={Gtk.Align.END} visible={ bind(showControls) }>
-        <icon icon="edit-delete-symbolic"/>
-      </button>
-    </box>
   </eventbox>
-  return ebox
 }
 
-function AddActions() {
-  
-  return <box 
-    className="add-actions"
-    homogeneous
-    valign={Gtk.Align.END}
-  >
 
-    <button onClicked={ () => widgets.set(widgets.get().concat([SimpleNote()])) }>
-      <icon icon="edit-symbolic" />
-    </button>
 
-    <button onClicked={ () => widgets.set(widgets.get().concat([SimpleCounter()]))  }>
-      <icon icon="numlock-enabled-symbolic" />
-    </button>
-
-    <button onClicked={ () => print(widgets.get())  }>
-      <icon icon="numlock-enabled-symbolic" />
-    </button>
-
+function Header(title: string, actions: JSX.Element) {
+  return <box className="header" halign={Gtk.Align.FILL}>
+    <label label={title} hexpand halign={Gtk.Align.START} />
+    { actions }
   </box>
 }
 
@@ -101,7 +93,6 @@ export default function Scratchpad() {
     <box vertical>
       { SimpleCounter("Counter") }
       { SimpleNote("Notes") }
-      { bind(widgets) }
     </box>
   </box>
 }

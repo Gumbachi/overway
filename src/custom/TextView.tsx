@@ -7,7 +7,7 @@ import { Gtk, Gdk, Widget, astalify, type ConstructProps } from "astal/gtk3"
 export class TextView extends astalify(Gtk.TextView) {
     static { GObject.registerClass(this) }
 
-    constructor(props: ConstructProps<TextView,Gtk.TextView.ConstructorProps>) {
+    constructor(props: ConstructProps<TextView, Gtk.TextView.ConstructorProps>) {
         super(props as any)
     }
 }

@@ -1,12 +1,25 @@
 import { Astal, Gtk } from "astal/gtk3"
 import Mpris from "gi://AstalMpris"
-import { bind } from "astal"
+import { bind, derive, Variable } from "astal"
 
 function lengthStr(length: number) {
   const min = Math.floor(length / 60)
   const sec = Math.floor(length % 60)
   const sec0 = sec < 10 ? "0" : ""
   return `${min}:${sec0}${sec}`
+}
+
+function MediaPlayerSwitcher({ selected, playerCount, onSelected }: { selected: number, playerCount: number, onSelected: (i: number) => void }) {
+  return <box className="switcher" vertical valign={ Gtk.Align.CENTER }>
+    { [...Array(playerCount).keys()].map(i => (
+      <button 
+        className={ selected == i ? "selected" : "unselected" }
+        onClicked={ () => onSelected(i) }
+        halign={ Gtk.Align.CENTER }
+        valign={ Gtk.Align.CENTER }
+      />
+    )) }
+  </box>
 }
 
 
@@ -96,14 +109,35 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
     </box>
 }
 
+type MprisValue = { selected: number, players: Mpris.Player[] }
+
 export default function MprisPlayers() {
   const mpris = Mpris.get_default()
-  return <box vertical valign={ Gtk.Align.END }>
+  const playerIndex = Variable(0)
+
+  const values: Variable<MprisValue> = Variable.derive(
+    [bind(playerIndex), bind(mpris, "players")],
+    (selected, players) => ({ selected, players })
+  )
+
+  return <box className="MprisPlayers" valign={ Gtk.Align.END }>
     { 
-      bind(mpris, "players").as(arr => arr
-        .filter(player => !player.busName.endsWith("playerctld"))
-        .map(player => ( <MediaPlayer player={player} />)
-      ))
-    }
+      bind(values)
+        .as(v => ({
+          "selected": v.selected,
+          "players": v.players.filter( player => !player.busName.endsWith("playerctld") )  
+        }))
+        .as(v => (
+          <box>
+            <MediaPlayerSwitcher
+              selected={ v.selected }
+              playerCount={ v.players.length }
+              onSelected={ value => playerIndex.set(value) }
+            />
+            <MediaPlayer player={ v.players[v.selected] }/>
+          </box>
+        ))
+    } 
   </box>
 }
+
