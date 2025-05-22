@@ -4,7 +4,6 @@ import Datetime from "../datetime/Datetime";
 import MprisPlayers from "../media-player/MediaPlayer";
 import VolumeControls from "../volume-controls/VolumeControls";
 import Tray from "../tray/Tray";
-import NotificationTray from "../notifications/NotificationTray";
 import QuickActions from "../quick-actions/QuickActions";
 import Scratchpad from "../scratchpad/Scratchpad";
 
@@ -15,7 +14,7 @@ export default function Overway() {
     name="overway"
     exclusivity={Astal.Exclusivity.EXCLUSIVE}
     layer={Astal.Layer.OVERLAY}
-    keymode={Astal.Keymode.ON_DEMAND}
+    keymode={Astal.Keymode.EXCLUSIVE}
     application={App}
     onKeyPressEvent={(self, event: Gdk.Event) => {
       if (event.get_keyval()[1] === Gdk.KEY_Escape) { self.hide() }
