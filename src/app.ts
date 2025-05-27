@@ -10,7 +10,7 @@ import { configPath, defaultConfig } from "./data/config"
 App.start({
   css: style,
   instanceName: "overway",
-  main: () => {
+  main() {
 
     // Create Init file if needed
     if (!readFile(configPath)) {
@@ -23,5 +23,11 @@ App.start({
     Overway()
     VolumeMixer()
     NotificationPopups(App.get_monitors()[0])
-  }
+  },
+
+  client(message: (msg: string) => string, ...args: Array<string>) {
+      const res = message("you can message the main instance")
+      print(res)
+  },
+
 })
