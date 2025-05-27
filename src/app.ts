@@ -25,9 +25,23 @@ App.start({
     NotificationPopups(App.get_monitors()[0])
   },
 
-  client(message: (msg: string) => string, ...args: Array<string>) {
-      const res = message("you can message the main instance")
-      print(res)
+  client(message: (msg: string) => string, ...args: Array<string>) { 
+    const res = message("you can message the main instance")
+    print(res)
   },
+
+  requestHandler(request: string, res: (response: any) => void) {
+    const mainWindow = App.get_window("overway")
+    const windows = App.get_windows()
+
+    if (mainWindow?.visible) {
+      windows.forEach(window => window.hide() )
+      res("Windows hidden")
+    } else {
+      mainWindow?.show() 
+      res("Window shown")
+    }
+  },
+
 
 })
