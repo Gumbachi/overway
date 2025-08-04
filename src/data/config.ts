@@ -1,7 +1,7 @@
 import { exec, monitorFile, readFile, Variable } from "astal";
 
-const home = exec("bash -c 'echo $XDG_CONFIG_HOME'")
-export const configPath = `${home}/overway/config.json`
+const home = exec("bash -c 'echo $HOME'")
+export const configPath = `${home}/.config/overway/config.json`
 export const defaultConfig = { 
   "showWidgetTitles": false,
 
