@@ -19,7 +19,7 @@
   {
     packages.${system}.default = pkgs.stdenvNoCC.mkDerivation { 
       name = "overway";
-      src = ./src;
+      src = ./.;
 
       nativeBuildInputs = [
         pkgs.wrapGAppsHook
@@ -45,7 +45,7 @@
         mkdir -p $out/bin
 
         esbuild \
-          --bundle src/app.js \
+          --bundle src/app.ts \
           --outfile=$out/bin/my-shell \
           --format=esm \
           --sourcemap=inline \
