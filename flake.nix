@@ -12,7 +12,7 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     pname = "overway";
-    entry = "app.ts";
+    entry = "main.tsx";
 
     astalPackages = with ags.packages.${system}; [
       io
