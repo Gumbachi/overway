@@ -1,0 +1,11 @@
+@use "../../variables" as *;
+
+.tray {
+
+  @include widget-container;
+
+  .item {
+    @include circle-button($icon-size: 2em, $padding: 0.4rem);
+    margin: 0px 2.5px;
+  }
+}

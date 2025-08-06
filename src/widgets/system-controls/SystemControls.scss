@@ -1,0 +1,10 @@
+@use "../../variables" as *;
+
+.system-controls {
+
+  @include widget-container;
+
+  button {
+    @include circle-button($icon-size: 2em);
+  }
+}

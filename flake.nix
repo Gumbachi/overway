@@ -17,7 +17,12 @@
     astalPackages = with ags.packages.${system}; [
       io
       astal4
-      # notifd tray wireplumber
+      mpris
+      network
+      tray
+      hyprland
+      wireplumber
+      notifd
     ];
 
     extraPackages = astalPackages ++ [

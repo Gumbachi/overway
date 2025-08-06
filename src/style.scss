@@ -1,0 +1,23 @@
+@use "widgets/dashboard/Dashboard.scss";
+@use "widgets/datetime/Datetime.scss";
+@use "widgets/system-controls/SystemControls.scss";
+@use "widgets/tray/Tray.scss";
+@use "widgets/media-player/MediaPlayer.scss";
+@use "widgets/volume-controls/VolumeControls.scss";
+// @use "widget/volume-controls/VolumeMixer";
+// @use "widget/notifications/Notification";
+// @use "widget/notifications/NotificationTray";
+// @use "widget/quick-actions/QuickActions";
+// @use "widget/scratchpad/Scratchpad";
+
+// Hide keyboard hinting
+* button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+* scale:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
