@@ -19,7 +19,7 @@
   {
     packages.${system}.default = pkgs.stdenvNoCC.mkDerivation { 
       name = "overway";
-      src = ./src;
+      src = ./.;
 
       nativeBuildInputs = [
         pkgs.wrapGAppsHook
