@@ -16,7 +16,7 @@
     entry = "app.ts";
 
     astalPackages = with ags.packages.${system}; [
-      astal4
+      astal3
       io
       mpris
       network
