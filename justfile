@@ -3,6 +3,6 @@ howdy:
   @echo "Howdy"
 
 run:
-  ags run -d ./src --gtk 3
+  ags run ./src/main.tsx
 
 
