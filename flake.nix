@@ -4,32 +4,150 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-    ags = {
-      url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    ags.url = "github:aylur/ags";
+    ags.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, ags }:
+  outputs = { self, nixpkgs, ags, }:
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    pname = "overway";
+    entry = "app.ts";
+
+    astalPackages = with ags.packages.${system}; [
+      astal4
+      io
+      mpris
+      network
+      tray
+      hyprland
+      wireplumber
+      notifd
+    ];
+
+    extraPackages = astalPackages ++ [
+      pkgs.libadwaita
+    ];
   in
   {
-    packages.${system}.default = ags.lib.bundle {
-      inherit pkgs;
+    packages.${system}.default = pkgs.stdenv.mkDerivation {
+      name = pname;
       src = ./src;
-      name = "overway";
-      entry = "app.ts";
-      gtk4 = false;
-      extraPackages = with ags.packages.${system};[
-        mpris
-        network
-        tray
-        hyprland
-        wireplumber
-        notifd
+
+      nativeBuildInputs = with pkgs; [
+        wrapGAppsHook
+        gobject-introspection
+        ags.packages.${system}.default
       ];
+
+      buildInputs = extraPackages ++ [pkgs.gjs];
+
+      installPhase = ''
+        runHook preInstall
+
+        mkdir -p $out/bin
+        mkdir -p $out/share
+        cp -r * $out/share
+        ags bundle ${entry} $out/bin/${pname} -d "SRC='$out/share'"
+
+        runHook postInstall
+      '';
+    };
+
+    devShells.${system}.default = pkgs.mkShell {
+      buildInputs = [
+        (ags.packages.${system}.default.override {
+          inherit extraPackages;
+        })
+      ];
+
+      shellHook = ''
+        echo "ags `ags --version`"
+      '';
     };
   };
 }
+
+
+
+
+
+
+
+
+# {
+#   description = "Desktop overlay for Wayland.";
+#
+#   inputs = {
+#     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+#
+#     astal.url = "github:aylur/astal";
+#     astal.inputs.nixpkgs.follows = "nixpkgs";
+#
+#     ags.url = "github:aylur/ags";
+#     ags.inputs.nixpkgs.follows = "nixpkgs";
+#     ags.inputs.astal.follows = "astal";
+#   };
+#
+#   outputs = { self, nixpkgs, ags, astal }:
+#   let
+#     system = "x86_64-linux";
+#     pkgs = nixpkgs.legacyPackages.${system};
+#   in
+#   {
+#
+#     packages.${system}.default = pkgs.stdenv.mkDerivation { 
+#       pname = "overway";
+#       src = ./src;
+#
+#       nativeBuildInputs = with pkgs; [
+#         wrapGAppsHook
+#         gobject-introspection
+#         ags.packages.${system}.default
+#       ];
+#
+#       buildInputs = [
+#         pkgs.glib
+#         pkgs.astal.gjs
+#
+#         astal.astal3
+#         astal.io
+#         astal.mpris
+#         astal.network
+#         astal.tray
+#         astal.hyprland
+#         astal.wireplumber
+#         astal.notifd
+#       ];
+#
+#       installPhase = ''
+#         ags bundle app.ts $out/bin/overway
+#       '';
+#
+#       preFixup = ''
+#         gappsWrapperArgs+=(
+#           --prefix PATH : ${pkgs.lib.makeBinPath ([
+#             # runtime executables
+#           ])}
+#         )
+#       '';
+#     };
+#
+#     # Dev Shell
+#     devShells.${system}.default = pkgs.mkShell {
+#       buildInputs = [
+#         (ags.packages.${system}.default.override { 
+#           extraPackages = [
+#             # cherry pick packages
+#           ];
+#         })
+#       ];
+#
+#       shellHook = ''
+#         echo "astal `astal --version`"
+#       '';
+#     };
+#
+#   };
+# }
