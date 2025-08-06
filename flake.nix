@@ -6,60 +6,80 @@
 
     ags.url = "github:aylur/ags";
     ags.inputs.nixpkgs.follows = "nixpkgs";
+
+    astal.url = "github:aylur/astal";
+    astal.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, ags, }:
+  outputs = { self, nixpkgs, ags, astal, }:
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    pname = "overway";
-    entry = "app.ts";
-
-    astalPackages = with ags.packages.${system}; [
-      astal3
-      io
-      mpris
-      network
-      tray
-      hyprland
-      wireplumber
-      notifd
-    ];
-
-    extraPackages = astalPackages ++ [
-      pkgs.libadwaita
-    ];
   in
   {
-    packages.${system}.default = pkgs.stdenv.mkDerivation {
-      name = pname;
-      src = ./src;
+    packages.${system}.default = pkgs.stdenvNoCC.mkDerivation { 
+      name = "overway";
+      src = ./src/.;
 
-      nativeBuildInputs = with pkgs; [
-        wrapGAppsHook
-        gobject-introspection
-        ags.packages.${system}.default
+      nativeBuildInputs = [
+        pkgs.wrapGAppsHook
+        pkgs.gobject-introspection
+        pkgs.esbuild
+        pkgs.meson
+        pkgs.ninja
+        pkgs.pkg-config
       ];
 
-      buildInputs = extraPackages ++ [pkgs.gjs];
+      buildInputs = [
+        pkgs.gjs
+        pkgs.glib
+        pkgs.gtk3
+        astal.packages.${system}.io
+        astal.packages.${system}.astal3
+        astal.packages.${system}.mpris
+        astal.packages.${system}.network
+        astal.packages.${system}.tray
+        astal.packages.${system}.hyprland
+        astal.packages.${system}.wireplumber
+        astal.packages.${system}.notifd
+      ];
 
-      installPhase = ''
-        runHook preInstall
-
-        mkdir -p $out/bin
-        mkdir -p $out/share
-        cp -r * $out/share
-        ags bundle ${entry} $out/bin/${pname} --gtk 3 -d "SRC='$out/share'"
-
-        runHook postInstall
-      '';
     };
 
+    # packages.${system}.default = pkgs.stdenv.mkDerivation {
+    #   name = pname;
+    #   src = ./src;
+    #
+    #   nativeBuildInputs = with pkgs; [
+    #     wrapGAppsHook
+    #     gobject-introspection
+    #     ags.packages.${system}.default
+    #   ];
+    #
+    #   buildInputs = extraPackages ++ [pkgs.gjs];
+    #
+    #   installPhase = ''
+    #     runHook preInstall
+    #
+    #     mkdir -p $out/bin
+    #     mkdir -p $out/share
+    #     cp -r * $out/share
+    #     ags bundle ${entry} $out/bin/${pname} --gtk 3 -d "SRC='$out/share'"
+    #
+    #     runHook postInstall
+    #   '';
+    # };
+
     devShells.${system}.default = pkgs.mkShell {
-      buildInputs = [
-        (ags.packages.${system}.default.override {
-          inherit extraPackages;
-        })
+      buildInputs = with ags.packages.${system}; [
+        astal3
+        io
+        mpris
+        network
+        tray
+        hyprland
+        wireplumber
+        notifd
       ];
 
       shellHook = ''
