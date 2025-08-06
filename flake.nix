@@ -28,7 +28,7 @@
   in {
     packages.${system}.default = pkgs.stdenv.mkDerivation {
       name = pname;
-      src = ./.;
+      src = ./src;
 
       nativeBuildInputs = with pkgs; [
         wrapGAppsHook
