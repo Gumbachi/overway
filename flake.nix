@@ -19,15 +19,12 @@
   {
     packages.${system}.default = pkgs.stdenvNoCC.mkDerivation { 
       name = "overway";
-      src = ./src/.;
+      src = ./src;
 
       nativeBuildInputs = [
         pkgs.wrapGAppsHook
         pkgs.gobject-introspection
         pkgs.esbuild
-        pkgs.meson
-        pkgs.ninja
-        pkgs.pkg-config
       ];
 
       buildInputs = [
@@ -43,6 +40,17 @@
         astal.packages.${system}.wireplumber
         astal.packages.${system}.notifd
       ];
+
+      installPhase = ''
+        mkdir -p $out/bin
+
+        esbuild \
+          --bundle src/app.js \
+          --outfile=$out/bin/my-shell \
+          --format=esm \
+          --sourcemap=inline \
+          --external:gi://\*
+      '';
 
     };
 
