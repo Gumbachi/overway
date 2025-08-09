@@ -1,5 +1,5 @@
 # Overway
 
-Desktop overlay for Wayland. Built using Astal. WIP.
+Desktop overlay for Wayland. WIP.
 
 ![Screenshot of Program](assets/screenshot.png)
