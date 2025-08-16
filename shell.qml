@@ -1,5 +1,11 @@
-import Quickshell
-import "widgets/dashboard"
 import QtQuick
+import Quickshell
 
-Dashboard {}
+import qs.modules.dashboard as Dashboard
+import qs.modules.border as Border
+
+ShellRoot {
+    Border.Widget {}
+    // Dashboard.Widget {}
+}
+

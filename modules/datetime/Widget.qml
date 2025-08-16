@@ -2,18 +2,22 @@ import QtQuick
 import QtQuick.Layouts
 
 ColumnLayout {
+    id: root
+
+    Service { id: clock }
+
     spacing: 2
     Layout.alignment: Qt.AlignCenter
     
     Text {
-        text: TimeProcess.time
+        text: clock.time
         font.bold: true
         font.pointSize: 32
         Layout.alignment: Qt.AlignCenter
     }
 
     Text {
-        text: TimeProcess.date
+        text: clock.date
         font.bold: true
         font.pointSize: 24
         Layout.alignment: Qt.AlignCenter
