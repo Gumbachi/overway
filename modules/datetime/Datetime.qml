@@ -4,11 +4,11 @@ import QtQuick.Layouts
 ColumnLayout {
     id: root
 
-    Service { id: clock }
+    DatetimeService { id: clock }
 
     spacing: 2
     Layout.alignment: Qt.AlignCenter
-    
+
     Text {
         text: clock.time
         font.bold: true
@@ -23,4 +23,3 @@ ColumnLayout {
         Layout.alignment: Qt.AlignCenter
     }
 }
-

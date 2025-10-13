@@ -12,7 +12,7 @@ RowLayout {
     property int borderWidth: 4
     property string borderColor: "red"
 
-    Service { id: actions }
+    SystemControlService { id: actions }
 
     CircleButton {
         Layout.preferredHeight: root.buttonSize

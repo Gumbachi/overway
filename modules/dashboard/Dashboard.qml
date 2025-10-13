@@ -4,8 +4,8 @@ import QtQuick.Layouts
 
 import Quickshell
 import Quickshell.Wayland
-import qs.modules.datetime as Datetime
-import qs.modules.systemcontrol as SystemControl
+import qs.modules.datetime
+import qs.modules.systemcontrol
 
 PanelWindow {
     implicitHeight: layout.implicitHeight
@@ -14,7 +14,7 @@ PanelWindow {
 	WlrLayershell.layer: WlrLayer.Overlay
 	WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
-    contentItem {        
+    contentItem {
         focus: true
         Keys.onPressed: event => {
             if (event.key == Qt.Key_Escape) Qt.quit()
@@ -26,9 +26,9 @@ PanelWindow {
         spacing: 8
         anchors.fill: parent
 
-        Datetime.Widget {}
+        Datetime {}
 
-        SystemControl.Widget {}
+        SystemControl {}
 
     }
 
