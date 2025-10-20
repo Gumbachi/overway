@@ -1,71 +1,46 @@
 import QtQuick
 import QtQuick.Layouts
 
-import qs.components
+import Quickshell.Widgets
 
 RowLayout {
     id: root
     spacing: 8
     Layout.alignment: Qt.AlignCenter
 
-    property int buttonSize: 75
-    property int borderWidth: 4
-    property string borderColor: "red"
+    SystemControlService { id: service }
 
-    SystemControlService { id: actions }
-
-    CircleButton {
-        Layout.preferredHeight: root.buttonSize
-        Layout.preferredWidth: root.buttonSize
-        onClicked: {
-            icon = "󰈉"
-            actions.killIdle
-        }
-        icon: "󰈈"
-        borderColor: root.borderColor
-        borderWidth: root.borderWidth
+    SystemControlButton {
+        icon: service.isIdleRunning ? "󰈉" : "󰈈"
+        process: service.toggleIdle
     }
 
-    CircleButton {
-        Layout.preferredHeight: root.buttonSize
-        Layout.preferredWidth: root.buttonSize
-        onClicked: actions.killIdle
-        icon: "󰽥"
-        borderColor: root.borderColor
-        borderWidth: root.borderWidth
+    SystemControlButton {
+        icon: service.isNightlightRunning ? "󰖔" : ""
+        process: service.toggleNightlight
     }
 
+    // Separator
     Rectangle {
-        Layout.preferredWidth: 2
-        Layout.preferredHeight: root.buttonSize - 20
-        color: "gray"
+        Layout.preferredWidth: 4
+        Layout.preferredHeight: 45
+        color: "black"
+        radius: 15
     }
 
-    CircleButton {
-        Layout.preferredHeight: root.buttonSize
-        Layout.preferredWidth: root.buttonSize
-        onClicked: actions.lock
+    SystemControlButton {
         icon: ""
-        borderColor: root.borderColor
-        borderWidth: root.borderWidth
+        process: service.lock
     }
 
-    CircleButton {
-        Layout.preferredHeight: root.buttonSize
-        Layout.preferredWidth: root.buttonSize
-        onClicked: actions.restart
+    SystemControlButton {
         icon: ""
-        borderColor: root.borderColor
-        borderWidth: root.borderWidth
+        process: service.restart
     }
 
-    CircleButton {
-        Layout.preferredHeight: root.buttonSize
-        Layout.preferredWidth: root.buttonSize
-        onClicked: actions.shutdown
+    SystemControlButton {
         icon: ""
-        borderColor: root.borderColor
-        borderWidth: root.borderWidth
+        process: service.shutdown
     }
 
 }

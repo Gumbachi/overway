@@ -17,21 +17,48 @@ Scope {
         command: ["sh", "-c", "loginctl lock-session"]
     }
 
-    readonly property var killIdle: Process {
-        command: ["sh", "-c", "systemctl stop --user hypridle"] 
+
+    property bool isNightlightRunning: true
+
+    readonly property var toggleNightlight: Process {
+        command: ["sh", "./scripts/toggle-wlsunset.sh"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                console.log(`Wlsunset: ${this.text}`)
+                root.isNightlightRunning = this.text === "started"
+            }
+        }
     }
-    readonly property var startIdle: Process {
-        command: ["sh", "-c", "systemctl start --user hypridle"] 
+
+    // Get idle status on program start
+    Process {
+        command: ["sh", "-c", "systemctl is-active --user wlsunset"]
+        running: true
+        stdout: StdioCollector {
+            onStreamFinished: root.isNightlightRunning = this.text.trim() === "active"
+        }
     }
+
+
 
     property bool isIdleRunning: true
 
-    readonly property var checkIdle: Process {
-        command: ["sh", "-c", "systemctl is-active --user hypridle"] 
-        running: true
+    readonly property var toggleIdle: Process {
+        command: ["sh", "./scripts/toggle-hypridle.sh"]
         stdout: StdioCollector {
-            onStreamFinished:  root.isIdleRunning = this.text === "active"
+            onStreamFinished: {
+                console.log(`Hypidle: ${this.text}`)
+                root.isIdleRunning = this.text === "started"
+            }
         }
     }
-}    
 
+    // Get idle status on program start
+    Process {
+        command: ["sh", "-c", "systemctl is-active --user hypridle"]
+        running: true
+        stdout: StdioCollector {
+            onStreamFinished: root.isIdleRunning = this.text.trim() === "active"
+        }
+    }
+}
