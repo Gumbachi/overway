@@ -5,6 +5,8 @@ import QtQuick
 Scope {
     id: root
 
+    property var nightlightScript: Qt.resolvedUrl("../../scripts/toggle-wlsunset.sh")
+
     readonly property var shutdown: Process {
         command: ["sh", "-c", "systemctl poweroff"]
     }
@@ -21,7 +23,8 @@ Scope {
     property bool isNightlightRunning: true
 
     readonly property var toggleNightlight: Process {
-        command: ["sh", "./scripts/toggle-wlsunset.sh"]
+        id: tnl
+        command: ["sh", `${Quickshell.shellDir}/scripts/toggle-wlsunset.sh`]
         stdout: StdioCollector {
             onStreamFinished: {
                 console.log(`Wlsunset: ${this.text}`)
@@ -44,7 +47,7 @@ Scope {
     property bool isIdleRunning: true
 
     readonly property var toggleIdle: Process {
-        command: ["sh", "./scripts/toggle-hypridle.sh"]
+        command: ["sh", `${Quickshell.shellDir}/scripts/toggle-hypridle.sh`]
         stdout: StdioCollector {
             onStreamFinished: {
                 console.log(`Hypidle: ${this.text}`)
