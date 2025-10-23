@@ -22,7 +22,7 @@ RowLayout {
 
     // Separator
     Rectangle {
-        Layout.preferredWidth: 4
+        Layout.preferredWidth: 2
         Layout.preferredHeight: 45
         color: "black"
         radius: 15
