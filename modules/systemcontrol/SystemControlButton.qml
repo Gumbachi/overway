@@ -1,6 +1,7 @@
 import QtQuick
 
 import Quickshell.Io
+import qs.config
 
 
 Rectangle {
@@ -12,16 +13,16 @@ Rectangle {
     implicitWidth: 65
     implicitHeight: 65
 
-    radius: 360
-    border.width: 2
-    border.color: "#75715E"
+    radius: Style.rounding.circle
+    border.width: Style.size.buttonBorder
+    border.color: Style.color.inactive
     color: "transparent"
 
     Text {
         text: root.icon
         anchors.centerIn: parent
         font.pixelSize: 36
-        color: "white"
+        color: Style.color.text
     }
 
     MouseArea {
@@ -29,8 +30,8 @@ Rectangle {
         onClicked: root.process.running = true
         hoverEnabled: true
 
-        onEntered: root.border.color = "#66D9EF"
-        onExited: root.border.color = "#75715E"
+        onEntered: root.border.color = Style.color.accent
+        onExited: root.border.color = Style.color.inactive
     }
 
 }

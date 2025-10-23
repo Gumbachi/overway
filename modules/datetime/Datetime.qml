@@ -2,21 +2,23 @@ import QtQuick
 import QtQuick.Layouts
 
 import Quickshell.Widgets
+import qs.config
 
 
 WrapperRectangle {
     Layout.alignment: Qt.AlignHCenter
-    margin: 8
-    radius: 10
-    border.width: 4
-    color: "#272822"
+    margin: Style.margin.container
+    radius: Style.rounding.soft
+    border.width: Style.size.containerBorder
+    border.color: Style.color.inactive
+    color: Style.color.background
 
     ColumnLayout {
         id: layout
 
         Text {
             text: clock.time
-            color: "white"
+            color: Style.color.text
             font.bold: true
             font.pointSize: 32
             Layout.alignment: Qt.AlignCenter
@@ -24,7 +26,7 @@ WrapperRectangle {
 
         Text {
             text: clock.date
-            color: "white"
+            color: Style.color.text
             font.bold: true
             font.pointSize: 24
             Layout.alignment: Qt.AlignCenter
