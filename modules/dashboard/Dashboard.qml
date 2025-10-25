@@ -9,6 +9,7 @@ import Quickshell.Io
 import qs.modules.datetime
 import qs.modules.systemcontrol
 import qs.modules.volume
+import qs.modules.mediaplayer
 import qs.config
 
 
@@ -35,7 +36,10 @@ PanelWindow {
         anchors.centerIn: scrim
 
 
-        Datetime { Layout.fillWidth: true }
+        RowLayout {
+            Datetime { }
+            MediaPlayer { implicitHeight: parent.height }
+        }
 
         RowLayout {
             Volume {}
