@@ -8,9 +8,9 @@ Scope {
     }
 
     readonly property string date: {
-        return Qt.formatDateTime(clock.date, "ddd MMMM, d, yyyy")
+        return Qt.formatDateTime(clock.date, "MMMM, d, yyyy")
     }
-    
+
     SystemClock {
         id: clock
         precision: SystemClock.Seconds

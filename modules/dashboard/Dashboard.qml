@@ -8,6 +8,7 @@ import Quickshell.Io
 
 import qs.modules.datetime
 import qs.modules.systemcontrol
+import qs.modules.volume
 import qs.config
 
 
@@ -33,10 +34,13 @@ PanelWindow {
         spacing: 8
         anchors.centerIn: scrim
 
-        Datetime {}
 
-        SystemControl {}
+        Datetime { Layout.fillWidth: true }
 
+        RowLayout {
+            Volume {}
+            SystemControl { implicitHeight: parent.height }
+        }
     }
 
 	// Allow hiding with ESC
