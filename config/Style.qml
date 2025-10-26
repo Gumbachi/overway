@@ -59,7 +59,7 @@ Singleton {
     }
 
     component Margin: JsonObject {
-        property int container: 10
+        property int container: 4
         property int scrim: 50
     }
 

@@ -37,13 +37,13 @@ PanelWindow {
 
 
         RowLayout {
-            Datetime { }
-            MediaPlayer { implicitHeight: parent.height }
+            Datetime { Layout.fillHeight: true }
+            MediaPlayer { Layout.fillHeight: true }
         }
 
         RowLayout {
-            Volume {}
-            SystemControl { implicitHeight: parent.height }
+            Volume { Layout.fillHeight: true; Layout.fillWidth: true }
+            SystemControl { Layout.fillHeight: true }
         }
     }
 

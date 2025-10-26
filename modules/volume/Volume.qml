@@ -68,12 +68,13 @@ Container {
     	required property PwNode node
         value: node.audio.volume
         onValueChanged: node.audio.volume = value
+        Layout.fillWidth: true
 
 
         from: 0; to: 1; stepSize: .01
 
         background: Rectangle {
-            implicitWidth: 200; implicitHeight: 6
+            implicitHeight: 6
             anchors.verticalCenter: parent.verticalCenter
             height: implicitHeight
             radius: Style.rounding.soft

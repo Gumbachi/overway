@@ -10,12 +10,13 @@ Container {
     DatetimeService { id: clock }
 
     ColumnLayout {
+
         Text {
             text: clock.time
             color: Style.color.text
             font.bold: true
             font.pointSize: 32
-            Layout.alignment: Qt.AlignCenter
+            Layout.alignment: Qt.AlignTop | Qt.AlignCenter
         }
 
         Text {
