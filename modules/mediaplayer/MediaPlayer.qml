@@ -179,6 +179,9 @@ Container {
             text: p.formatTime(p.player.position)
             color: Style.color.text
             font.bold: true
+            font.pixelSize: 14
+            Layout.topMargin: -5
+            Layout.leftMargin: 5
             Layout.preferredWidth: 25
         }
 
@@ -218,6 +221,9 @@ Container {
             Layout.alignment: Qt.AlignRight | Qt.AlignTop
             text: p.formatTime(p.player.length)
             font.bold: true
+            font.pixelSize: 14
+            Layout.topMargin: -5
+            Layout.rightMargin: 5
             color: Style.color.text
         }
     }
