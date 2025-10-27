@@ -11,12 +11,14 @@ Container {
 
     ColumnLayout {
 
+        Item { Layout.fillHeight: true }
+
         Text {
             text: clock.time
             color: Style.color.text
             font.bold: true
-            font.pointSize: 32
-            Layout.alignment: Qt.AlignTop | Qt.AlignCenter
+            font.pointSize: 36
+            Layout.alignment: Qt.AlignBottom | Qt.AlignCenter
         }
 
         Text {

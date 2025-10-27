@@ -38,12 +38,19 @@ PanelWindow {
 
 
         RowLayout {
-            Datetime { Layout.fillHeight: true }
+            Datetime {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+            }
             MediaPlayer { Layout.fillHeight: true }
         }
 
         RowLayout {
-            Volume { Layout.fillHeight: true; Layout.fillWidth: true }
+            Volume {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.minimumWidth: 250
+            }
             SystemControl { Layout.fillHeight: true }
         }
 
