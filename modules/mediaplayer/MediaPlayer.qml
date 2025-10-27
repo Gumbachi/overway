@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import Quickshell.Widgets
 import Quickshell.Services.Mpris
 
 import qs.config
@@ -87,15 +88,17 @@ Container {
         Image {
             source: p.player.trackArtUrl
             fillMode: Image.PreserveAspectCrop
-            Layout.fillHeight: true
-            Layout.rowSpan: 4
-            Layout.preferredWidth: this.height
             sourceSize.width: width
             sourceSize.height: height
+            Layout.fillHeight: true
+            Layout.rowSpan: 4
+            Layout.preferredWidth: height
         }
-        // This causes quickshell to crash right now
+
+        // This is causing quickshell to crash right now
+        // Move image into this and put the three layout properties in here to change
         // ClippingWrapperRectangle {
-        //     // radius: Style.rounding.hard
+        //     radius: Style.rounding.hard
         // }
 
 

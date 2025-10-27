@@ -10,6 +10,7 @@ import qs.modules.datetime
 import qs.modules.systemcontrol
 import qs.modules.volume
 import qs.modules.mediaplayer
+import qs.modules.tray
 import qs.config
 
 
@@ -32,7 +33,7 @@ PanelWindow {
 
     ColumnLayout {
         id: layout
-        spacing: 8
+        spacing: 10
         anchors.centerIn: scrim
 
 
@@ -44,6 +45,10 @@ PanelWindow {
         RowLayout {
             Volume { Layout.fillHeight: true; Layout.fillWidth: true }
             SystemControl { Layout.fillHeight: true }
+        }
+
+        Tray {
+            Layout.fillWidth: true
         }
     }
 
