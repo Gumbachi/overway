@@ -27,6 +27,7 @@ Container {
         // Determine icon from thresholds param
         function getIcon(): string {
             for (const [key, value] of Object.entries(thresholds)) {
+                if (node === null) return thresholds[0]
                 if (parseFloat(node.audio.volume) <= key) return value
             }
             const values = Object.values(thresholds)
@@ -66,7 +67,10 @@ Container {
         id: control
 
     	required property PwNode node
-        value: node.audio.volume
+        value: {
+            if (node === null) return 0
+            return node.audio.volume
+        }
         onValueChanged: node.audio.volume = value
         Layout.fillWidth: true
 
@@ -108,7 +112,6 @@ Container {
                 font.bold: true
                 color: Style.color.text
             }
-
         }
     }
 
