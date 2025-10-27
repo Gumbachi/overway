@@ -3,6 +3,11 @@ howdy:
   @echo "Howdy"
 
 run:
-  ags run -d ./src --gtk 3
+  qs -p ~/code/overway
 
+@fix:
+  - rm .qmlls.ini; touch .qmlls.ini
+  - timeout 0.5s just run &>/dev/null
 
+@list:
+  qs list --all
