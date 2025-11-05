@@ -10,15 +10,19 @@ Container {
     DatetimeService { id: clock }
 
     ColumnLayout {
+        // anchors.fill: parent
+        spacing: -15
+        anchors.centerIn: parent
 
-        Item { Layout.fillHeight: true }
+        // Item { Layout.fillHeight: true }
 
         Text {
             text: clock.time
             color: Style.color.text
             font.bold: true
             font.pointSize: 36
-            Layout.alignment: Qt.AlignBottom | Qt.AlignCenter
+            horizontalAlignment: Text.AlignHCenter
+            Layout.fillWidth: true
         }
 
         Text {
@@ -26,7 +30,8 @@ Container {
             color: Style.color.text
             font.bold: true
             font.pointSize: 24
-            Layout.alignment: Qt.AlignCenter
+            horizontalAlignment: Text.AlignHCenter
+            Layout.fillWidth: true
         }
     }
 }
