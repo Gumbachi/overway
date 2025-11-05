@@ -20,6 +20,7 @@
           withI3 = false;
         })
         pkgs.qt6.qtdeclarative
+        pkgs.nerd-fonts.symbols-only
       ];
       shellHook = ''
         echo "Quickshell `qs --version`"
