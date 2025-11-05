@@ -24,6 +24,7 @@ Container {
             text: parent.icon
             anchors.centerIn: parent
             font.pixelSize: 36
+            font.family: "BlexMono Nerd Font"
             color: Style.color.text
         }
 

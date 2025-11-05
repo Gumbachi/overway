@@ -71,7 +71,7 @@ Container {
             if (node === null) return 0
             return node.audio.volume
         }
-        onValueChanged: node.audio.volume = value
+        onMoved: node.audio.volume = value
         Layout.fillWidth: true
 
 
