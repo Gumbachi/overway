@@ -11,6 +11,7 @@ import qs.modules.systemcontrol
 import qs.modules.volume
 import qs.modules.mediaplayers
 import qs.modules.tray
+import qs.modules.powerprofiles
 import qs.modules.playground
 import qs.config
 
@@ -59,8 +60,13 @@ PanelWindow {
             SystemControl { Layout.fillHeight: true }
         }
 
-        Tray {
-            Layout.fillWidth: true
+        RowLayout {
+            spacing: Style.dashboard.horizontalGapSize
+            Tray {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+            PowerProfiles {}
         }
     }
 
