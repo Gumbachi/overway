@@ -3,6 +3,8 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 
+import qs.modules.dashboard
+
 Singleton {
     id: root
 
@@ -10,6 +12,7 @@ Singleton {
     property alias rounding: adapter.rounding
     property alias margin: adapter.margin
     property alias size: adapter.size
+    property alias dashboard: adapter.dashboardStyle
 
     readonly property string homePath: Quickshell.env("HOME")
     readonly property string configPath: Quickshell.env("OVERWAY_CONFIG") || `${homePath}/.config/overway`
@@ -39,6 +42,8 @@ Singleton {
             property Rounding rounding: Rounding {}
             property Margin margin: Margin {}
             property Size size: Size {}
+
+            property DashboardStyle dashboardStyle: DashboardStyle {}
 
         }
     }

@@ -9,8 +9,9 @@ import Quickshell.Io
 import qs.modules.datetime
 import qs.modules.systemcontrol
 import qs.modules.volume
-import qs.modules.mediaplayer
+import qs.modules.mediaplayers
 import qs.modules.tray
+import qs.modules.playground
 import qs.config
 
 
@@ -21,7 +22,7 @@ PanelWindow {
     implicitWidth: layout.implicitWidth + Style.dashboard.scrimMargin
     exclusionMode: ExclusionMode.Ignore // Prevent overlay from reserving space
 	WlrLayershell.layer: WlrLayer.Overlay
-	WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
+	WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 	color: "transparent"
 
     Rectangle {
@@ -31,11 +32,13 @@ PanelWindow {
 	    anchors.fill: parent
     }
 
+
     ColumnLayout {
         id: layout
         spacing: Style.dashboard.verticalGapSize
         anchors.centerIn: scrim
 
+        // Playground { Layout.fillWidth: true }
 
         RowLayout {
             spacing: Style.dashboard.horizontalGapSize
@@ -43,7 +46,7 @@ PanelWindow {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
             }
-            MediaPlayer { Layout.fillHeight: true }
+            MediaPlayers { Layout.fillHeight: true }
         }
 
         RowLayout {
