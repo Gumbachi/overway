@@ -15,7 +15,7 @@ GridLayout {
     function onCycleClicked() { console.log("Cycle Clicked") }
 
 
-    columns: 5
+    columns: 4
     rows: 4
 
     function formatTime(durationInSeconds: int): string {
@@ -25,67 +25,11 @@ GridLayout {
         return `${minutes}:${leadingZero}${seconds}`
     }
 
-    Slider {
-        id: volumeSlider
-        property alias player: root.player
-
-
-        Layout.rowSpan: 4
-        Layout.fillHeight: true
-
-        enabled: player.volumeSupported
-        value: player.volume
-        onMoved: player.volume = value
-        live: true
-        wheelEnabled: true
-
-        from: 0; to: 1; stepSize: .01
-        orientation: Qt.Vertical
-
-        background: Rectangle {
-            implicitWidth: 6
-            width: implicitWidth
-            anchors.horizontalCenter: parent.horizontalCenter
-            radius: Style.rounding.soft
-            color: Style.color.inactive
-
-            // Active Background
-            Rectangle {
-                height: (1 - volumeSlider.visualPosition) * parent.height
-                width: parent.width
-                color: Style.color.accent
-                radius: Style.rounding.soft
-                anchors.bottom: parent.bottom
-            }
-        }
-
-        handle: Rectangle {
-            property alias slider: volumeSlider
-            property alias player: volumeSlider.player
-
-            visible: player.volumeSupported
-            enabled: player.volumeSupported
-
-            x: slider.availableWidth / 2 - this.width / 2
-            y: slider.visualPosition * (slider.availableHeight - height)
-            implicitWidth: 24; implicitHeight: implicitWidth
-            radius: parent.height
-            color: Style.color.background
-            border.color: slider.hovered ? Style.color.accent : Style.color.inactive
-            border.width: Style.size.buttonBorder
-
-            Text {
-                anchors.fill: parent
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                text: Math.round(volumeSlider.value * 100)
-                font.pixelSize: 10
-                font.bold: true
-                color: Style.color.text
-            }
-        }
-    }
-
+    // VolumeSlider {
+    //     player: root.player
+    //     Layout.rowSpan: 4
+    //     Layout.fillHeight: true
+    // }
 
     // This is causing quickshell to crash right now
     // Move image into this and put the three layout properties in here to change
@@ -142,59 +86,13 @@ GridLayout {
         color: Style.color.text
     }
 
-    Slider {
-        id: trackSlider
-        property alias player: root.player
-
+    TrackSlider {
+        player: root.player
         Layout.columnSpan: 3
         Layout.topMargin: 20
-
-        value: player.positionSupported ? player.position : 0
-        onMoved: player.position = value
-
-        from: 0; to: player.length; stepSize: 1
-
-        Layout.minimumWidth: 250
-        Layout.preferredWidth: 400
-
-        FrameAnimation {
-            // only emit the signal when the position is actually changing.
-            running: root.player.playbackState == MprisPlaybackState.Playing
-            // emit the positionChanged signal every frame.
-            onTriggered: root.player.positionChanged()
-        }
-
-        background: Rectangle {
-            implicitHeight: 6
-            anchors.verticalCenter: parent.verticalCenter
-            height: implicitHeight
-            radius: Style.rounding.soft
-            color: Style.color.inactive
-
-            // Active Background
-            Rectangle {
-                width: trackSlider.visualPosition * parent.width
-                height: parent.height
-                color: Style.color.accent
-                radius: Style.rounding.soft
-            }
-        }
-
-        handle: Rectangle {
-
-            visible: root.player.positionSupported
-            enabled: root.player.positionSupported
-
-            x: trackSlider.leftPadding + trackSlider.visualPosition * (trackSlider.availableWidth - width)
-            y: trackSlider.topPadding + trackSlider.availableHeight / 2 - height / 2
-            implicitWidth: 20; implicitHeight: implicitWidth
-            radius: parent.height
-            color: Style.color.background
-            border.color: trackSlider.hovered ? Style.color.accent : Style.color.inactive
-            border.width: Style.size.buttonBorder
-        }
+        Layout.minimumWidth: 350
+        Layout.preferredWidth: 450
     }
-
 
     Text {
         id: durationLeft
@@ -282,6 +180,23 @@ GridLayout {
             function onClick() {
                 root.player.shuffle = !root.player.shuffle
             }
+        }
+
+
+        Rectangle {
+            visible: root.player.volumeSupported
+            implicitWidth: Style.size.buttonBorder
+            Layout.preferredHeight: parent.height * 0.8
+            Layout.leftMargin: 4
+            Layout.rightMargin: 4
+            color: Style.color.inactive
+            radius: 20
+        }
+
+        VolumeSlider {
+            visible: root.player.volumeSupported
+            player: root.player
+            Layout.minimumWidth: 100
         }
     }
 

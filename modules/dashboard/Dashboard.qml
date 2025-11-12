@@ -23,7 +23,7 @@ PanelWindow {
     implicitWidth: layout.implicitWidth + Style.dashboard.scrimMargin
     exclusionMode: ExclusionMode.Ignore // Prevent overlay from reserving space
 	WlrLayershell.layer: WlrLayer.Overlay
-	WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 	color: "transparent"
 
     Rectangle {
@@ -39,7 +39,7 @@ PanelWindow {
         spacing: Style.dashboard.verticalGapSize
         anchors.centerIn: scrim
 
-        // Playground { Layout.fillWidth: true }
+        // Playground { Layout.fillWidth: false }
 
         RowLayout {
             spacing: Style.dashboard.horizontalGapSize
@@ -63,6 +63,7 @@ PanelWindow {
         RowLayout {
             spacing: Style.dashboard.horizontalGapSize
             Tray {
+                parentWindow: overway
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }

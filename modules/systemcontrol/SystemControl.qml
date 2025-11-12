@@ -39,9 +39,11 @@ Container {
 
     component Separator: Rectangle {
         Layout.preferredWidth: Style.size.buttonBorder
-        Layout.preferredHeight: parent.implicitHeight * 0.7 // Fill 70% of height
+        Layout.preferredHeight: parent.implicitHeight * 0.8 // Fill 70% of height
         color: Style.color.inactive
         radius: 20
+        Layout.rightMargin: 4
+        Layout.leftMargin: 4
     }
 
     RowLayout {

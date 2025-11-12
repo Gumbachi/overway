@@ -1,12 +1,19 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 
+import Quickshell
 import Quickshell.Services.SystemTray
+// import Quickshell.Services.DBusMenu
 
 import qs.config
 import qs.components
 
 Container {
+    id: root
+    required property QsWindow parentWindow
+
     RowLayout {
         Repeater {
             model: SystemTray.items.values
@@ -14,7 +21,7 @@ Container {
                 required property int index
                 required property SystemTrayItem modelData
 
-                id: trayItem
+                id: trayButton
 
                 Layout.preferredWidth: 40;
                 Layout.preferredHeight: Layout.preferredWidth
@@ -29,24 +36,31 @@ Container {
                 Image {
                     width: 24; height: width
                     anchors.centerIn: parent
-                    source: trayItem.modelData.icon
+                    source: trayButton.modelData.icon
                     fillMode: Image.PreserveAspectFit
                 }
 
+                // TrayMenu {
+                //     menu: trayButton.modelData.menu
+                // }
+
                 MouseArea {
+                    property alias trayItem: trayButton.modelData
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
                     onClicked: event => {
-                        console.log(trayItem.width)
-                        if (event.button === Qt.LeftButton)
-                            trayItem.modelData.activate()
-                        else
-                            trayItem.modelData.secondaryActivate()
+                        console.log(trayButton.width)
+                        if (event.button === Qt.LeftButton) {
+                            trayItem.display(root.parentWindow, trayButton.x + 100 , trayButton.y)
+                        } else {
+                            trayItem.secondaryActivate()
+                        }
                     }
                     hoverEnabled: true
                     onEntered: parent.border.color = Style.color.accent
                     onExited: parent.border.color = Style.color.inactive
                 }
+
             }
         }
 

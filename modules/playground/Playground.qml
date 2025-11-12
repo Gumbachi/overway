@@ -10,11 +10,14 @@ import qs.components
 
 
 Container {
-    RowLayout {
-        SineWave {}
-        SineWave {}
+    Rectangle {
+        implicitHeight: 40
+        implicitWidth: 40
+        color: "red"
 
-        Item { Layout.fillWidth: true }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: console.log("Button Clicked")
+        }
     }
-
 }

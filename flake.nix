@@ -15,12 +15,13 @@
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = [
-        (quickshell.packages.${pkgs.system}.default.override {
-          withX11 = false;
-          withI3 = false;
-        })
-        pkgs.qt6.qtdeclarative
+        quickshell.packages.${system}.default
+        pkgs.kdePackages.qtdeclarative
         pkgs.nerd-fonts.symbols-only
+        # (quickshell.packages.${pkgs.system}.default.override {
+        #   withX11 = false;
+        #   withI3 = false;
+        # })
       ];
       shellHook = ''
         echo "Quickshell `qs --version`"

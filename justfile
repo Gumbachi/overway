@@ -9,5 +9,8 @@ run:
   - rm .qmlls.ini; touch .qmlls.ini
   - timeout 0.5s just run &>/dev/null
 
-@list:
+list:
   qs list --all
+
+kill PID:
+  qs kill --pid {{PID}}
