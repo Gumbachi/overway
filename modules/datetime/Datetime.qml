@@ -23,6 +23,7 @@ Container {
             font.pointSize: 36
             horizontalAlignment: Text.AlignHCenter
             Layout.fillWidth: true
+            Layout.minimumHeight: 72
         }
 
         Text {
