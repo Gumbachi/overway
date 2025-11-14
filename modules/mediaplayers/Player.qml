@@ -11,8 +11,8 @@ GridLayout {
     id: root
     required property MprisPlayer player
 
+    signal cycleClicked()
     property int playerCount: 0
-    function onCycleClicked() { console.log("Cycle Clicked") }
 
 
     columns: 4
@@ -70,11 +70,12 @@ GridLayout {
 
     PlayerButton {
         icon: "󰓢"
+        visible: root.playerCount > 1
         implicitWidth: 24
         hoverEnabled: root.playerCount > 1
         iconColor: root.playerCount > 1 ? Style.color.text : Style.color.inactive
         Layout.alignment: Qt.AlignRight
-        function onClick() { root.onCycleClicked() }
+        onClicked: { root.cycleClicked() }
     }
 
     Text {
@@ -113,13 +114,13 @@ GridLayout {
         PlayerButton {
             icon: "󰒮"
             enabled: root.player.canGoPrevious
-            function onClick() { root.player.previous() }
+            onClicked: root.player.previous()
         }
 
         PlayerButton {
             icon: root.player.playbackState === MprisPlaybackState.Paused ? "󰐊" : "󰏤"
             enabled: root.player.canTogglePlaying
-            function onClick() {
+            onClicked: {
                 const state = root.player.playbackState
                 if (state === MprisPlaybackState.Playing) {
                     root.player.pause()
@@ -134,7 +135,7 @@ GridLayout {
         PlayerButton {
             icon: "󰒭"
             enabled: root.player.canGoNext
-            function onClick() { root.player.next() }
+            onClicked: root.player.next()
         }
 
         Rectangle {
@@ -155,7 +156,7 @@ GridLayout {
             // Layout.rightMargin: 10
             hoverEnabled: root.player.loopState === MprisLoopState.None
             border.color: root.player.loopState === MprisLoopState.None ? Style.color.inactive : Style.color.accent
-            function onClick() {
+            onClicked: {
                 switch (root.player.loopState) {
                     case MprisLoopState.None:
                         root.player.loopState = MprisLoopState.Playlist
@@ -177,9 +178,7 @@ GridLayout {
             // Layout.leftMargin: 10
             hoverEnabled: !root.player.shuffle
             border.color: root.player.shuffle ? Style.color.accent : Style.color.inactive
-            function onClick() {
-                root.player.shuffle = !root.player.shuffle
-            }
+            onClicked: root.player.shuffle = !root.player.shuffle
         }
 
 

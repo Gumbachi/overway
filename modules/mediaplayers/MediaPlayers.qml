@@ -30,50 +30,25 @@ Container {
         }
     }
 
-    StackLayout {
-        id: playerStack
-        currentIndex: root.currentPlayerIndex
+    Loader {
 
-        Repeater {
-            model: root.players
-            Player {
-                required property MprisPlayer modelData
-                player: modelData
-                playerCount: root.players.length
-
-                function onCycleClicked() {
-                    if (root.currentPlayerIndex >= root.players.length - 1) {
-                        root.currentPlayerIndex = 0
-                    } else {
-                        root.currentPlayerIndex += 1
-                    }
-                    console.log(root.currentPlayerIndex)
+        readonly property Component nothingPlaying: NothingPlaying {}
+        readonly property Component player: Player {
+            player: root.players[root.currentPlayerIndex]
+            playerCount: root.players.length
+            onCycleClicked: {
+                if (root.currentPlayerIndex >= root.players.length - 1) {
+                    root.currentPlayerIndex = 0
+                } else {
+                    root.currentPlayerIndex += 1
                 }
+                console.log(root.currentPlayerIndex)
             }
         }
+
+        sourceComponent: root.players.length === 0 ? nothingPlaying: player
+
     }
 
+
 }
-
-
-// Old Switcher
-        // RowLayout {
-        //     Layout.alignment: Qt.AlignCenter
-        //     Layout.rightMargin: 50
-        //     Layout.leftMargin: 50
-        //     Repeater {
-        //         model: root.players.length
-        //         Rectangle {
-        //             required property int index
-        //             Layout.fillWidth: true
-        //             implicitHeight: 8
-        //             radius: Style.rounding.hard
-        //             color: index === root.currentPlayerIndex ? Style.color.accent : Style.color.inactive
-
-        //             MouseArea {
-        //                 anchors.fill: parent
-        //                 onClicked: root.currentPlayerIndex = parent.index
-        //             }
-        //         }
-        //     }
-        // }

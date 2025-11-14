@@ -4,10 +4,12 @@ import QtQuick
 import qs.config
 
 Rectangle {
+    id: root
     required property string icon
     property string iconColor: Style.color.text
     property bool hoverEnabled: true
-    function onClick() {}
+
+    signal clicked()
 
     implicitWidth: 28; implicitHeight: implicitWidth
     radius: Style.rounding.circle
@@ -25,7 +27,7 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: parent.onClick()
+        onClicked: { root.clicked() }
         hoverEnabled: parent.hoverEnabled
         onEntered: parent.border.color = Style.color.accent
         onExited: {

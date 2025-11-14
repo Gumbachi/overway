@@ -15,7 +15,7 @@
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = [
-        quickshell.packages.${system}.default
+        pkgs.quickshell
         pkgs.kdePackages.qtdeclarative
         pkgs.nerd-fonts.symbols-only
         # (quickshell.packages.${pkgs.system}.default.override {
