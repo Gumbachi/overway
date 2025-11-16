@@ -14,9 +14,9 @@ Container {
         required property string icon
         required property Process process
 
-        implicitWidth: 65; implicitHeight: implicitWidth
-        radius: Style.rounding.circle
-        border.width: Style.size.buttonBorder
+        implicitWidth: Style.size.systemControlButton; implicitHeight: implicitWidth
+        radius: Style.rounding.full
+        border.width: Style.borders.button
         border.color: Style.color.inactive
         color: "transparent"
 
@@ -38,7 +38,7 @@ Container {
     }
 
     component Separator: Rectangle {
-        Layout.preferredWidth: Style.size.buttonBorder
+        Layout.preferredWidth: Style.borders.button
         Layout.preferredHeight: parent.implicitHeight * 0.8 // Fill 70% of height
         color: Style.color.inactive
         radius: 20

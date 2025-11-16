@@ -23,12 +23,12 @@ Container {
 
                 id: trayButton
 
-                Layout.preferredWidth: 40;
+                Layout.preferredWidth: Style.size.trayButton;
                 Layout.preferredHeight: Layout.preferredWidth
 
 
-                radius: Style.rounding.circle
-                border.width: Style.size.buttonBorder
+                radius: Style.rounding.full
+                border.width: Style.borders.button
                 border.color: Style.color.inactive
                 color: "transparent"
                 Layout.alignment: Qt.AlignCenter

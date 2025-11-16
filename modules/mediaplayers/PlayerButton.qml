@@ -11,9 +11,9 @@ Rectangle {
 
     signal clicked()
 
-    implicitWidth: 28; implicitHeight: implicitWidth
-    radius: Style.rounding.circle
-    border.width: Style.size.buttonBorder
+    implicitWidth: Style.size.mediaPlayerButton; implicitHeight: implicitWidth
+    radius: Style.rounding.full
+    border.width: Style.borders.button
     border.color: Style.color.inactive
     color: "transparent"
 

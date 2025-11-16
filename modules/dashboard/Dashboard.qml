@@ -17,10 +17,11 @@ import qs.config
 
 
 PanelWindow {
+
     id: overway
     visible: true
-    implicitHeight: layout.implicitHeight + Style.dashboard.scrimMargin
-    implicitWidth: layout.implicitWidth + Style.dashboard.scrimMargin
+    implicitHeight: layout.implicitHeight + Style.margin.scrim
+    implicitWidth: layout.implicitWidth + Style.margin.scrim
     exclusionMode: ExclusionMode.Ignore // Prevent overlay from reserving space
 	WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
@@ -29,20 +30,20 @@ PanelWindow {
     Rectangle {
         id: scrim
         color: Style.color.scrim
-	    radius: Style.dashboard.scrimRounding
+	    radius: Style.rounding.soft
 	    anchors.fill: parent
     }
 
 
     ColumnLayout {
         id: layout
-        spacing: Style.dashboard.verticalGapSize
+        spacing: Style.spacing.gaps
         anchors.centerIn: scrim
 
         // Playground { Layout.fillWidth: false }
 
         RowLayout {
-            spacing: Style.dashboard.horizontalGapSize
+            spacing: Style.spacing.gaps
             Datetime {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -51,7 +52,7 @@ PanelWindow {
         }
 
         RowLayout {
-            spacing: Style.dashboard.horizontalGapSize
+            spacing: Style.spacing.gaps
             Volume {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -61,7 +62,7 @@ PanelWindow {
         }
 
         RowLayout {
-            spacing: Style.dashboard.horizontalGapSize
+            spacing: Style.spacing.gaps
             Tray {
                 parentWindow: overway
                 Layout.fillWidth: true

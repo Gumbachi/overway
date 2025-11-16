@@ -62,7 +62,7 @@ GridLayout {
         Layout.columnSpan: 2
         text: root.player.trackTitle || "Unknown Title"
         font.bold: true
-        font.pixelSize: 16
+        font.pixelSize: Style.fontSize.titleMedium
         color: Style.color.text
         elide: Text.ElideRight
     }
@@ -81,8 +81,8 @@ GridLayout {
     Text {
         id: artist
         Layout.columnSpan: 3
-        font.pixelSize: 14
-        Layout.topMargin: -8
+        font.pixelSize: Style.fontSize.titleSmall
+        Layout.topMargin: -4
         text: root.player.trackArtist || "Unknown Artist"
         color: Style.color.text
     }
@@ -140,7 +140,7 @@ GridLayout {
 
         Rectangle {
             visible: root.player.shuffleSupported || root.player.loopSupported
-            implicitWidth: Style.size.buttonBorder
+            implicitWidth: Style.borders.button
             Layout.preferredHeight: parent.height * 0.8
             Layout.leftMargin: 4
             Layout.rightMargin: 4
@@ -184,7 +184,7 @@ GridLayout {
 
         Rectangle {
             visible: root.player.volumeSupported
-            implicitWidth: Style.size.buttonBorder
+            implicitWidth: Style.borders.button
             Layout.preferredHeight: parent.height * 0.8
             Layout.leftMargin: 4
             Layout.rightMargin: 4

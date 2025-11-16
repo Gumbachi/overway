@@ -18,9 +18,10 @@ Container {
 
         property real lastVolume: 0.50
 
-        implicitWidth: 40; implicitHeight: implicitWidth
-        radius: Style.rounding.circle
-        border.width: Style.size.buttonBorder
+        implicitWidth: Style.size.volumeControlButton
+        implicitHeight: implicitWidth
+        radius: Style.rounding.full
+        border.width: Style.borders.button
         border.color: Style.color.inactive
         color: "transparent"
 
@@ -101,7 +102,7 @@ Container {
             radius: parent.height
             color: Style.color.background
             border.color: control.hovered ? Style.color.accent : Style.color.inactive
-            border.width: Style.size.buttonBorder
+            border.width: Style.borders.button
 
             Text {
                 anchors.fill: parent

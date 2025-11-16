@@ -30,7 +30,7 @@ Slider {
     }
 
     background: Rectangle {
-        implicitHeight: 6
+        implicitHeight: 4
         anchors.verticalCenter: parent.verticalCenter
         height: implicitHeight
         radius: Style.rounding.soft

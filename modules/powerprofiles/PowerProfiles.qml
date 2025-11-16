@@ -18,11 +18,11 @@ Container {
 
         property bool hoverEnabled: true
 
-        implicitWidth: 40
+        implicitWidth: Style.size.trayButton
         implicitHeight: implicitWidth
 
-        radius: Style.rounding.circle
-        border.width: Style.size.buttonBorder
+        radius: Style.rounding.full
+        border.width: Style.borders.button
         border.color: Style.color.inactive
         color: "transparent"
 

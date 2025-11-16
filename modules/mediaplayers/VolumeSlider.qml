@@ -39,11 +39,11 @@ Slider {
 
         x: slider.visualPosition * (slider.availableWidth - width)
         y: slider.availableHeight / 2 - height / 2
-        implicitWidth: 28; implicitHeight: implicitWidth
+        implicitWidth: Style.size.mediaPlayerButton; implicitHeight: implicitWidth
         radius: parent.height
         color: Style.color.background
         border.color: slider.hovered ? Style.color.accent : Style.color.inactive
-        border.width: Style.size.buttonBorder
+        border.width: Style.borders.button
 
         Text {
             // anchors.centerIn: parent
