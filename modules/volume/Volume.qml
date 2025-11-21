@@ -73,6 +73,7 @@ Container {
             return node.audio.volume
         }
         onMoved: node.audio.volume = value
+        Layout.minimumWidth: 250
         Layout.fillWidth: true
 
 
