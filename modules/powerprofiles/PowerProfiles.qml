@@ -10,71 +10,44 @@ import qs.config
 Container {
 
 
-    component PowerProfileButton: Rectangle {
-        id: ppbutton
-        required property string icon
+    component PowerProfileButton: CircleButton {
         required property string label
-        function onClick() { console.log("ppbutton clicked") }
-
-        property bool hoverEnabled: true
 
         implicitWidth: Style.size.trayButton
         implicitHeight: implicitWidth
 
-        radius: Style.rounding.full
-        border.width: Style.borders.button
-        border.color: Style.color.inactive
-        color: "transparent"
-
-        Text {
-            text: ppbutton.icon
-            anchors.centerIn: parent
-            font.pixelSize: 24
-            font.family: "JetbrainsMono Nerd Font"
-            color: Style.color.text
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: parent.onClick()
-            hoverEnabled: parent.hoverEnabled
-            onEntered: parent.border.color = Style.color.accent
-            onExited: {
-                if (parent.hoverEnabled)
-                    parent.border.color = Style.color.inactive
-            }
-        }
-
+        fontSize: 24
+        fontFamily: "BlexMono Nerd Font"
     }
 
     RowLayout {
 
         PowerProfileButton {
-            icon: "󰌪"
+            text: "󰌪"
             label: "Power-Saving"
             border.color: PowerProfiles.profile === PowerProfile.PowerSaver ? Style.color.accent : Style.color.inactive
             hoverEnabled: PowerProfiles.profile !== PowerProfile.PowerSaver
-            function onClick() {
+            onClicked: {
                 PowerProfiles.profile = PowerProfile.PowerSaver
                 console.log("Power Profile set to PowerSaver")
             }
         }
         PowerProfileButton {
-            icon: "󰇼"
+            text: "󰇼"
             label: "Balanced"
             border.color: PowerProfiles.profile === PowerProfile.Balanced ? Style.color.accent : Style.color.inactive
             hoverEnabled: PowerProfiles.profile !== PowerProfile.Balanced
-            function onClick() {
+            onClicked: {
                 PowerProfiles.profile = PowerProfile.Balanced
                 console.log("Power Profile set to Balanced")
             }
         }
         PowerProfileButton {
-            icon: "󰓅"
+            text: "󰓅"
             label: "Performance"
             border.color: PowerProfiles.profile === PowerProfile.Performance ? Style.color.accent : Style.color.inactive
             hoverEnabled: PowerProfiles.profile !== PowerProfile.Performance
-            function onClick() {
+            onClicked: {
                 PowerProfiles.profile = PowerProfile.Performance
                 console.log("Power Profile set to Performance")
             }

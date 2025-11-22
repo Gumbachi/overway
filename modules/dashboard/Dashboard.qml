@@ -13,6 +13,7 @@ import qs.modules.mediaplayers
 import qs.modules.tray
 import qs.modules.powerprofiles
 import qs.modules.playground
+import qs.modules.counters
 import qs.config
 
 
@@ -34,13 +35,19 @@ PanelWindow {
 	    anchors.fill: parent
     }
 
-
-    ColumnLayout {
+    GridLayout {
         id: layout
-        spacing: Style.spacing.gaps
+        rowSpacing: Style.spacing.gaps
+        columnSpacing: Style.spacing.gaps
         anchors.centerIn: scrim
 
-        // Playground { Layout.fillWidth: false }
+        columns: 2
+        rows: 3
+
+        Counters {
+            Layout.rowSpan: 3
+            Layout.fillHeight: true
+        }
 
         RowLayout {
             spacing: Style.spacing.gaps
@@ -48,29 +55,58 @@ PanelWindow {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
             }
-            MediaPlayers { Layout.fillHeight: true }
+            MediaPlayers {}
         }
 
         RowLayout {
-            spacing: Style.spacing.gaps
             Volume {
-                Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.minimumWidth: 250
             }
-            SystemControl { Layout.fillHeight: true }
+            SystemControl {
+                Layout.fillHeight: true
+            }
         }
 
         RowLayout {
-            spacing: Style.spacing.gaps
             Tray {
                 parentWindow: overway
                 Layout.fillWidth: true
-                Layout.fillHeight: true
             }
             PowerProfiles {}
         }
     }
+
+
+    // ColumnLayout {
+    //     id: layout
+    //     spacing: Style.spacing.gaps
+    //     anchors.centerIn: scrim
+
+    //     Counters {}
+
+    //     // Playground { Layout.fillWidth: false }
+
+
+    //     RowLayout {
+    //         spacing: Style.spacing.gaps
+    //         Volume {
+    //             Layout.fillHeight: true
+    //             Layout.fillWidth: true
+    //             Layout.minimumWidth: 250
+    //         }
+    //         SystemControl { Layout.fillHeight: true }
+    //     }
+
+    //     RowLayout {
+    //         spacing: Style.spacing.gaps
+    //         Tray {
+    //             parentWindow: overway
+    //             Layout.fillWidth: true
+    //             Layout.fillHeight: true
+    //         }
+    //         PowerProfiles {}
+    //     }
+    // }
 
 	// Allow hiding with ESC
     contentItem {

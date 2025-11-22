@@ -11,22 +11,21 @@ Container {
 
     id: root
 
-    component VolumeButton: Rectangle {
+    component VolumeButton: CircleButton {
         id: button
         required property PwNode node
         required property var thresholds
 
         property real lastVolume: 0.50
 
+        fontSize: 24
+
         implicitWidth: Style.size.volumeControlButton
         implicitHeight: implicitWidth
         radius: Style.rounding.full
-        border.width: Style.borders.button
-        border.color: Style.color.inactive
-        color: "transparent"
 
-        // Determine icon from thresholds param
-        function getIcon(): string {
+        // Fetch proper icon for volume level
+        text: {
             for (const [key, value] of Object.entries(thresholds)) {
                 if (node === null) return thresholds[0]
                 if (parseFloat(node.audio.volume) <= key) return value
@@ -35,7 +34,8 @@ Container {
             return values[values.length -1] // Get last value item
         }
 
-        function toggleMute(): void {
+        // Toggle device volume
+        onClicked: {
             if (node.audio.muted || node.audio.volume == 0) {
                 console.log(`Unmuting ${node.nickname}`)
                 node.audio.muted = false
@@ -46,21 +46,6 @@ Container {
                 node.audio.muted = true
                 node.audio.volume = 0
             }
-        }
-
-        Text {
-            text: button.getIcon()
-            anchors.centerIn: parent
-            font.pixelSize: 22
-            color: Style.color.text
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: button.toggleMute()
-            hoverEnabled: true
-            onEntered: parent.border.color = Style.color.accent
-            onExited: parent.border.color = Style.color.inactive
         }
     }
 

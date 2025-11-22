@@ -6,6 +6,7 @@ import Quickshell.Widgets
 import Quickshell.Services.Mpris
 
 import qs.config
+import qs.components
 
 GridLayout {
     id: root
@@ -68,12 +69,12 @@ GridLayout {
     }
 
 
-    PlayerButton {
-        icon: "󰓢"
+    CircleButton {
         visible: root.playerCount > 1
+        text: "󰓢"
+        textColor: root.playerCount > 1 ? Style.color.text : Style.color.inactive
         implicitWidth: 24
         hoverEnabled: root.playerCount > 1
-        iconColor: root.playerCount > 1 ? Style.color.text : Style.color.inactive
         Layout.alignment: Qt.AlignRight
         onClicked: { root.cycleClicked() }
     }
@@ -111,14 +112,14 @@ GridLayout {
         Layout.alignment: Qt.AlignCenter
         spacing: 4
 
-        PlayerButton {
-            icon: "󰒮"
+        CircleButton {
+            text: "󰒮"
             enabled: root.player.canGoPrevious
             onClicked: root.player.previous()
         }
 
-        PlayerButton {
-            icon: root.player.playbackState === MprisPlaybackState.Paused ? "󰐊" : "󰏤"
+        CircleButton {
+            text: root.player.playbackState === MprisPlaybackState.Paused ? "󰐊" : "󰏤"
             enabled: root.player.canTogglePlaying
             onClicked: {
                 const state = root.player.playbackState
@@ -132,28 +133,22 @@ GridLayout {
             }
         }
 
-        PlayerButton {
-            icon: "󰒭"
+        CircleButton {
+            text: "󰒭"
             enabled: root.player.canGoNext
             onClicked: root.player.next()
         }
 
-        Rectangle {
+        Separator {
             visible: root.player.shuffleSupported || root.player.loopSupported
-            implicitWidth: Style.borders.button
-            Layout.preferredHeight: parent.height * 0.8
-            Layout.leftMargin: 4
-            Layout.rightMargin: 4
-            color: Style.color.inactive
-            radius: 20
+            Layout.margins: 4
         }
 
-        PlayerButton {
+        CircleButton {
             visible: root.player.loopSupported
             enabled: root.player.loopSupported
-            icon: root.player.loopState === MprisLoopState.Track ? "󰑘" : "󰑖"
-            iconColor: root.player.loopState === MprisLoopState.None ? Style.color.inactive : Style.color.text
-            // Layout.rightMargin: 10
+            text: root.player.loopState === MprisLoopState.Track ? "󰑘" : "󰑖"
+            textColor: root.player.loopState === MprisLoopState.None ? Style.color.inactive : Style.color.text
             hoverEnabled: root.player.loopState === MprisLoopState.None
             border.color: root.player.loopState === MprisLoopState.None ? Style.color.inactive : Style.color.accent
             onClicked: {
@@ -170,26 +165,20 @@ GridLayout {
             }
         }
 
-        PlayerButton {
+        CircleButton {
             visible: root.player.shuffleSupported
             enabled: root.player.shuffleSupported
-            icon: "󰒝"
-            iconColor: root.player.shuffle ? Style.color.text : Style.color.inactive
-            // Layout.leftMargin: 10
+            text: "󰒝"
+            textColor: root.player.shuffle ? Style.color.text : Style.color.inactive
             hoverEnabled: !root.player.shuffle
             border.color: root.player.shuffle ? Style.color.accent : Style.color.inactive
             onClicked: root.player.shuffle = !root.player.shuffle
         }
 
 
-        Rectangle {
+        Separator {
             visible: root.player.volumeSupported
-            implicitWidth: Style.borders.button
-            Layout.preferredHeight: parent.height * 0.8
-            Layout.leftMargin: 4
-            Layout.rightMargin: 4
-            color: Style.color.inactive
-            radius: 20
+            Layout.margins: 4
         }
 
         VolumeSlider {
