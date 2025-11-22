@@ -7,19 +7,21 @@ import Quickshell.Services.Mpris
 import qs.config
 
 Slider {
-    required property MprisPlayer player
     id: slider
 
-    enabled: player.volumeSupported
-    value: player.volume
-    onMoved: player.volume = value
+    property bool showHandle: true
+    property bool showHandleNumber: true
+    property int handleSize: Style.size.mediaPlayerButton
+
+    property int troughSize: 4
+
     live: true
     wheelEnabled: true
 
     from: 0; to: 1; stepSize: .01
 
     background: Rectangle {
-        implicitHeight: 4
+        height: slider.troughSize
         anchors.verticalCenter: parent.verticalCenter
         radius: Style.rounding.soft
         color: Style.color.inactive
@@ -34,24 +36,24 @@ Slider {
     }
 
     handle: Rectangle {
-        visible: slider.player.volumeSupported
-        enabled: slider.player.volumeSupported
-
+        visible: slider.showHandle
         x: slider.visualPosition * (slider.availableWidth - width)
         y: slider.availableHeight / 2 - height / 2
-        implicitWidth: Style.size.mediaPlayerButton; implicitHeight: implicitWidth
+        implicitWidth: slider.handleSize
+        implicitHeight: implicitWidth
         radius: parent.height
         color: Style.color.background
         border.color: slider.hovered ? Style.color.accent : Style.color.inactive
         border.width: Style.borders.button
 
         Text {
-            // anchors.centerIn: parent
+            visible: slider.showHandleNumber
             anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             text: Math.round(slider.value * 100)
             font.pixelSize: 12
+            font.family: Style.fontFamily.mono
             font.bold: true
             color: Style.color.text
         }

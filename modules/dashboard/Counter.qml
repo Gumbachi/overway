@@ -24,7 +24,7 @@ Loader {
             Layout.minimumWidth: 150
         }
 
-        CircleButton {
+        Button {
             text: "-"
             onClicked: root.value -= 1
         }
@@ -37,7 +37,7 @@ Loader {
             Layout.fillWidth: true
         }
 
-        CircleButton {
+        Button {
             text: "+"
             onClicked: root.value += 1
         }

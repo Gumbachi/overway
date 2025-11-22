@@ -99,6 +99,7 @@ Singleton {
 
     component FontFamily: JsonObject {
         property string symbols: "BlexMono Nerd Font"
+        property string mono: "BlexMono Nerd Font"
         property string standard: "Inter"
     }
 }

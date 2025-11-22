@@ -1,12 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 
-import Quickshell.Widgets
 import Quickshell.Services.Mpris
 
 import qs.config
-import qs.components
+import qs.components as Overway
 
 GridLayout {
     id: root
@@ -26,11 +24,37 @@ GridLayout {
         return `${minutes}:${leadingZero}${seconds}`
     }
 
-    // VolumeSlider {
-    //     player: root.player
-    //     Layout.rowSpan: 4
-    //     Layout.fillHeight: true
-    // }
+    component VolumeSlider: Overway.Slider {
+        required property MprisPlayer player
+
+        enabled: player.volumeSupported
+        value: player.volume
+        onMoved: player.volume = value
+
+        troughSize: 4
+        handleSize: Style.size.mediaPlayerButton
+    }
+
+    component TrackSlider: Overway.Slider {
+        required property MprisPlayer player
+
+        id: slider
+        from: 0; to: player.length; stepSize: 1
+        value: player.positionSupported ? player.position : 0
+        onMoved: player.position = value
+
+        troughSize: 6
+        handleSize: 20
+        showHandleNumber: false
+        wheelEnabled: false
+
+        FrameAnimation {
+            // only emit the signal when the position is actually changing.
+            running: slider.player.playbackState == MprisPlaybackState.Playing
+            // emit the positionChanged signal every frame.
+            onTriggered: slider.player.positionChanged()
+        }
+    }
 
     // This is causing quickshell to crash right now
     // Move image into this and put the three layout properties in here to change
@@ -69,7 +93,7 @@ GridLayout {
     }
 
 
-    CircleButton {
+    Overway.Button {
         visible: root.playerCount > 1
         text: "󰓢"
         textColor: root.playerCount > 1 ? Style.color.text : Style.color.inactive
@@ -112,13 +136,13 @@ GridLayout {
         Layout.alignment: Qt.AlignCenter
         spacing: 4
 
-        CircleButton {
+        Overway.Button {
             text: "󰒮"
             enabled: root.player.canGoPrevious
             onClicked: root.player.previous()
         }
 
-        CircleButton {
+        Overway.Button {
             text: root.player.playbackState === MprisPlaybackState.Paused ? "󰐊" : "󰏤"
             enabled: root.player.canTogglePlaying
             onClicked: {
@@ -133,18 +157,19 @@ GridLayout {
             }
         }
 
-        CircleButton {
+        Overway.Button {
             text: "󰒭"
             enabled: root.player.canGoNext
             onClicked: root.player.next()
         }
 
-        Separator {
+        Overway.Separator {
             visible: root.player.shuffleSupported || root.player.loopSupported
-            Layout.margins: 4
+            Layout.leftMargin: 4
+            Layout.rightMargin: 4
         }
 
-        CircleButton {
+        Overway.Button {
             visible: root.player.loopSupported
             enabled: root.player.loopSupported
             text: root.player.loopState === MprisLoopState.Track ? "󰑘" : "󰑖"
@@ -165,7 +190,7 @@ GridLayout {
             }
         }
 
-        CircleButton {
+        Overway.Button {
             visible: root.player.shuffleSupported
             enabled: root.player.shuffleSupported
             text: "󰒝"
@@ -175,10 +200,10 @@ GridLayout {
             onClicked: root.player.shuffle = !root.player.shuffle
         }
 
-
-        Separator {
+        Overway.Separator {
             visible: root.player.volumeSupported
-            Layout.margins: 4
+            Layout.leftMargin: 4
+            Layout.rightMargin: 4
         }
 
         VolumeSlider {

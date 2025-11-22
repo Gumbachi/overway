@@ -1,15 +1,13 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
 
 import Quickshell.Services.Mpris
 
 import qs.config
-import qs.components
+import qs.components as Overway
 
-Container {
+Overway.Container {
 
     id: root
     property int currentPlayerIndex: 0
@@ -32,8 +30,16 @@ Container {
 
     Loader {
 
-        readonly property Component nothingPlaying: NothingPlaying {}
-        readonly property Component player: Player {
+        readonly property Component nothingPlaying: Text {
+            text: "Nothing Playing"
+            color: Style.color.text
+            font.bold: true
+            font.pointSize: Style.fontSize.displayLarge
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        readonly property Component player: MediaPlayer {
             player: root.players[root.currentPlayerIndex]
             playerCount: root.players.length
             onCycleClicked: {
@@ -49,6 +55,4 @@ Container {
         sourceComponent: root.players.length === 0 ? nothingPlaying: player
 
     }
-
-
 }

@@ -20,7 +20,8 @@ Container {
             text: clock.time
             color: Style.color.text
             font.bold: true
-            font.pointSize: 36
+            font.pointSize: 42
+            font.family: "BlexMono Nerd Font"
             horizontalAlignment: Text.AlignHCenter
             Layout.fillWidth: true
             Layout.minimumHeight: 72

@@ -2,13 +2,13 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs.config
-import qs.components
+import qs.components as Overway
 
-Container {
+Overway.Container {
 
     SystemControlService { id: service }
 
-    component Button: CircleButton {
+    component SystemControlButton: Overway.Button {
         implicitWidth: Style.size.systemControlButton
         implicitHeight: implicitWidth
 
@@ -19,32 +19,32 @@ Container {
     RowLayout {
         spacing: 8
 
-        Button {
+        SystemControlButton {
             text: service.isIdleRunning ? "󰈉" : "󰈈"
             onClicked: service.toggleIdle.running = true
         }
 
-        Button {
+        SystemControlButton {
             text: service.isNightlightRunning ? "󰖔" : ""
             onClicked: service.toggleNightlight.running = true
         }
 
-        Separator {
+        Overway.Separator {
             sizeRatio: 0.5
             Layout.margins: 4
         }
 
-        Button {
+        SystemControlButton {
             text: ""
             onClicked: service.lock.running = true
         }
 
-        Button {
+        SystemControlButton {
             text: ""
             onClicked: service.restart.running = true
         }
 
-        Button {
+        SystemControlButton {
             text: ""
             onClicked: service.shutdown.running = true
         }

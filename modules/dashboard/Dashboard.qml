@@ -6,14 +6,6 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
 
-import qs.modules.datetime
-import qs.modules.systemcontrol
-import qs.modules.volume
-import qs.modules.mediaplayers
-import qs.modules.tray
-import qs.modules.powerprofiles
-import qs.modules.playground
-import qs.modules.counters
 import qs.config
 
 
@@ -55,7 +47,9 @@ PanelWindow {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
             }
-            MediaPlayers {}
+            MediaPlayers {
+                Layout.fillHeight: true
+            }
         }
 
         RowLayout {
@@ -75,38 +69,6 @@ PanelWindow {
             PowerProfiles {}
         }
     }
-
-
-    // ColumnLayout {
-    //     id: layout
-    //     spacing: Style.spacing.gaps
-    //     anchors.centerIn: scrim
-
-    //     Counters {}
-
-    //     // Playground { Layout.fillWidth: false }
-
-
-    //     RowLayout {
-    //         spacing: Style.spacing.gaps
-    //         Volume {
-    //             Layout.fillHeight: true
-    //             Layout.fillWidth: true
-    //             Layout.minimumWidth: 250
-    //         }
-    //         SystemControl { Layout.fillHeight: true }
-    //     }
-
-    //     RowLayout {
-    //         spacing: Style.spacing.gaps
-    //         Tray {
-    //             parentWindow: overway
-    //             Layout.fillWidth: true
-    //             Layout.fillHeight: true
-    //         }
-    //         PowerProfiles {}
-    //     }
-    // }
 
 	// Allow hiding with ESC
     contentItem {

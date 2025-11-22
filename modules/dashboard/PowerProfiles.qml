@@ -4,13 +4,13 @@ import QtQuick.Layouts
 
 import Quickshell.Services.UPower
 
-import qs.components
 import qs.config
+import qs.components as Overway
 
-Container {
+Overway.Container {
 
 
-    component PowerProfileButton: CircleButton {
+    component PowerProfileButton: Overway.Button {
         required property string label
 
         implicitWidth: Style.size.trayButton
