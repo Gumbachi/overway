@@ -11,6 +11,10 @@ Container {
 
     id: root
 
+    property PwNode sink: Pipewire.defaultAudioSink
+    property PwNode source: Pipewire.defaultAudioSource
+	PwObjectTracker { objects: [ root.sink, root.source ] }
+
     component VolumeButton: CircleButton {
         id: button
         required property PwNode node
@@ -102,29 +106,26 @@ Container {
         }
     }
 
-    ColumnLayout {
-    	PwObjectTracker { objects: [ source.node, sink.node ] }
+    GridLayout {
+    	rows: 2; columns: 2
+    	columnSpacing: 8
 
-        RowLayout {
-            id: source
-            property PwNode node: Pipewire.defaultAudioSource
-            VolumeButton {
-                node: source.node
-                thresholds: { 0: "󰍭", 1: "󰍬" }
-            }
-            VolumeSlider { node: source.node }
+        VolumeButton {
+            node: root.source
+            thresholds: { 0: "󰍭", 1: "󰍬" }
+        }
+        VolumeSlider {
+            node: root.source
         }
 
-        RowLayout {
-            id: sink
-            property PwNode node: Pipewire.defaultAudioSink
-            VolumeButton {
-                node: sink.node
-                thresholds: { 0: "󰝟", .33: "󰕿", .67: "󰖀", 0.99: "󰕾" }
-            }
-            VolumeSlider { node: sink.node }
+
+        VolumeButton {
+            node: root.sink
+            thresholds: { 0: "󰝟", .33: "󰕿", .67: "󰖀", 0.99: "󰕾" }
+        }
+        VolumeSlider {
+            node: root.sink
         }
 
     }
-
 }
