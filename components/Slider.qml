@@ -28,7 +28,12 @@ Slider {
 
         // Active Background
         Rectangle {
-            width: slider.visualPosition * parent.width
+
+           // Extra width added to keep the end of the active background in the middle
+           // of the slider handle (it looks better). Only if the handle is shown
+            property real backgroundPadding: slider.showHandle ? ((0.5 - slider.visualPosition) * slider.handle.width) : 0
+
+            width: slider.visualPosition * parent.width + backgroundPadding
             height: parent.height
             color: Style.color.accent
             radius: Style.rounding.soft
