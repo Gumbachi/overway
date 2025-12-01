@@ -15,6 +15,14 @@ Slider {
 
     property int troughSize: 4
 
+    // Extra width added to keep the end of the active background in the middle
+    // of the slider handle (it looks better). Only if the handle is shown
+    readonly property real backgroundPadding: showHandle ? ((0.5 - visualPosition) * handle.width) : 0
+
+    // Allows the slider to move slightly past the ends of the trough to fix the trough
+    // sticking out by a few pixels sometimes
+    readonly property real handleOvershoot: showHandle ? ((0.5 - visualPosition) * 2) : 0
+
     live: true
     wheelEnabled: true
 
@@ -29,11 +37,8 @@ Slider {
         // Active Background
         Rectangle {
 
-           // Extra width added to keep the end of the active background in the middle
-           // of the slider handle (it looks better). Only if the handle is shown
-            property real backgroundPadding: slider.showHandle ? ((0.5 - slider.visualPosition) * slider.handle.width) : 0
 
-            width: slider.visualPosition * parent.width + backgroundPadding
+            width: slider.visualPosition * parent.width + slider.backgroundPadding
             height: parent.height
             color: Style.color.accent
             radius: Style.rounding.soft
@@ -42,7 +47,7 @@ Slider {
 
     handle: Rectangle {
         visible: slider.showHandle
-        x: slider.visualPosition * (slider.availableWidth - width)
+        x: slider.visualPosition * (slider.availableWidth - width) - slider.handleOvershoot
         y: slider.availableHeight / 2 - height / 2
         implicitWidth: slider.handleSize
         implicitHeight: implicitWidth
