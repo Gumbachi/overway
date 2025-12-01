@@ -8,7 +8,7 @@ Scope {
     }
 
     readonly property string date: {
-        return Qt.formatDateTime(clock.date, "MMMM, d, yyyy")
+        return Qt.formatDateTime(clock.date, "MMMM, dd, yyyy")
     }
 
     SystemClock {
