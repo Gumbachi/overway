@@ -64,10 +64,10 @@ PanelWindow {
 
         RowLayout {
             spacing: Style.spacing.gaps
-            // Tray {
-            //     parentWindow: overway
-            //     Layout.fillWidth: true
-            // }
+            Tray {
+                parentWindow: overway
+                Layout.fillWidth: true
+            }
             PowerProfiles {}
         }
     }

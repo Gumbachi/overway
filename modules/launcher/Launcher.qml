@@ -66,7 +66,7 @@ PanelWindow {
                 IconImage {
                     source: Quickshell.iconPath(entry.modelData.icon)
                     implicitSize: 30
-                    Component.onCompleted: console.log(`ICON: ${entry.modelData.icon}`)
+                    // Component.onCompleted: console.log(`ICON: ${entry.modelData.icon}`)
                 }
                 Text {
                     text: entry.modelData.name

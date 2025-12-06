@@ -15,6 +15,7 @@ Singleton {
     property alias fontSize: style.fontSize
 
     FileView {
+        id: fileview
         readonly property string homePath: Quickshell.env("HOME")
         readonly property string configPath: Quickshell.env("OVERWAY_CONFIG") || `${homePath}/.config/overway`
 
@@ -30,7 +31,11 @@ Singleton {
                 // writeAdapter()
             }
         }
-        onLoadFailed: err => console.error(`Failed to read style.json: ${err}`)
+        onLoadFailed: err => {
+            console.error(`Failed to read config: ${err}`)
+            console.log("Attempting to write default.")
+            writeAdapter()
+        }
         onSaveFailed: err => console.error(`Failed to save style.json: ${err}`)
 
         JsonAdapter {
@@ -46,6 +51,16 @@ Singleton {
             property FontSize fontSize: FontSize {}
 
         }
+    }
+
+
+    Process {
+        id: createConfig
+        running: false
+        command: [ "mkdir", "-p", `${fileview.configPath}` ]
+        // stdout: StdioCollector {
+        //     onStreamFinished: console.log(`line read: ${this.text}`)
+        // }
     }
 
     component Color: JsonObject {

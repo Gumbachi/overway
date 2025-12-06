@@ -4,6 +4,9 @@ import QtQuick.Layouts
 
 import Quickshell
 import Quickshell.Services.SystemTray
+import Quickshell.DBusMenu
+
+import qs.config
 
 Item {
     id: root
@@ -17,7 +20,7 @@ Item {
         radius: Style.rounding.full
         border.width: Style.borders.button
         border.color: Style.color.inactive
-        color: "red"
+        color: "transparent"
 
         anchors.fill: parent
 
@@ -38,7 +41,7 @@ Item {
                     entry.activate()
                     // trayItem.display(root.parentWindow, trayButton.x + 100 , trayButton.y)
                 } else {
-                    trayItem.secondaryActivate()
+                    entry.secondaryActivate()
                 }
             }
             hoverEnabled: true
@@ -48,7 +51,7 @@ Item {
     }
 
     // QsMenuAnchor {
-    //     // anchors.fill: parent
+    //     anchor.item: button
     //     menu: root.modelData.menu
     // }
 }
