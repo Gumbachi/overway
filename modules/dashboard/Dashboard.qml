@@ -33,13 +33,13 @@ PanelWindow {
         columnSpacing: Style.spacing.gaps
         anchors.centerIn: scrim
 
-        columns: 2
+        columns: 1
         rows: 3
 
-        Counters {
-            Layout.rowSpan: 3
-            Layout.fillHeight: true
-        }
+        // Counters {
+        //     Layout.rowSpan: 3
+        //     Layout.fillHeight: true
+        // }
 
         RowLayout {
             spacing: Style.spacing.gaps
@@ -53,6 +53,7 @@ PanelWindow {
         }
 
         RowLayout {
+            spacing: Style.spacing.gaps
             Volume {
                 Layout.fillWidth: true
             }
@@ -62,10 +63,11 @@ PanelWindow {
         }
 
         RowLayout {
-            Tray {
-                parentWindow: overway
-                Layout.fillWidth: true
-            }
+            spacing: Style.spacing.gaps
+            // Tray {
+            //     parentWindow: overway
+            //     Layout.fillWidth: true
+            // }
             PowerProfiles {}
         }
     }

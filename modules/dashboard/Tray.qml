@@ -17,50 +17,10 @@ Container {
     RowLayout {
         Repeater {
             model: SystemTray.items.values
-            Rectangle {
-                required property int index
-                required property SystemTrayItem modelData
-
-                id: trayButton
-
-                Layout.preferredWidth: Style.size.trayButton;
+            TrayItem {
+                Layout.preferredWidth: Style.size.trayButton
                 Layout.preferredHeight: Layout.preferredWidth
-
-
-                radius: Style.rounding.full
-                border.width: Style.borders.button
-                border.color: Style.color.inactive
-                color: "transparent"
                 Layout.alignment: Qt.AlignCenter
-
-                Image {
-                    width: 24; height: width
-                    anchors.centerIn: parent
-                    source: trayButton.modelData.icon
-                    fillMode: Image.PreserveAspectFit
-                }
-
-                // TrayMenu {
-                //     menu: trayButton.modelData.menu
-                // }
-
-                MouseArea {
-                    property alias trayItem: trayButton.modelData
-                    anchors.fill: parent
-                    acceptedButtons: Qt.LeftButton | Qt.RightButton
-                    onClicked: event => {
-                        console.log(trayButton.width)
-                        if (event.button === Qt.LeftButton) {
-                            trayItem.display(root.parentWindow, trayButton.x + 100 , trayButton.y)
-                        } else {
-                            trayItem.secondaryActivate()
-                        }
-                    }
-                    hoverEnabled: true
-                    onEntered: parent.border.color = Style.color.accent
-                    onExited: parent.border.color = Style.color.inactive
-                }
-
             }
         }
 

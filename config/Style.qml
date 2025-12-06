@@ -49,10 +49,10 @@ Singleton {
     }
 
     component Color: JsonObject {
-        property string text: "#F9F8F5"
-        property string accent: "#66D9EF"
-        property string background: "#272822"
-        property string inactive: "#75715E"
+        property string text: "#D0D0FA"
+        property string accent: "#F10596"
+        property string background: "#00002A"
+        property string inactive: "#50507A"
         property string scrim: "#55CCCCCC" // #AARRGGBB
     }
 
@@ -79,8 +79,8 @@ Singleton {
     }
 
     component Borders: JsonObject {
-        property int container: 4
-        property int button: 1
+        property int container: 2
+        property int button: 2
     }
 
     component Size: JsonObject {
